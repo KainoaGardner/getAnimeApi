@@ -1,2 +1,4 @@
 .venv
 server/app/__pycache__
+terminal/.venv
+terminal/app/__pycache__

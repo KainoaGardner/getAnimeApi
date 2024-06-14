@@ -5,7 +5,13 @@ BASE = "http://127.0.0.1:5000/"
 
 
 response = requests.get(
-    BASE + "users/account", {"login": json.dumps({"test": "hello"})}
+    BASE + "users/account",
+    {"login": json.dumps({"username": "frog", "password": "123"})},
+)
+
+response = requests.get(
+    BASE + "users/account",
+    {"logout": json.dumps({"username": "frog", "password": "123"})},
 )
 # response = requests.post(BASE + "users/account", {"login": {"username": "123"}})
 # response = requests.delete(BASE + "tests/1")
