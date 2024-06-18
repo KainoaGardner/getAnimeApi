@@ -2,9 +2,10 @@ from flask import request
 from flask_restful import Resource, abort
 import requests
 import json
-from datetime import date
+from datetime import date, datetime
 
-from app import app, db, api, auth_token, mal_auth_token
+from app import app, db, api
+from app.other import day_dict
 from app.tables import UserModel, WatchingModel
 
 
@@ -17,11 +18,9 @@ class UserAccount(Resource):
                 username=username, password=password
             ).first()
             if user:
-                return {"result": f"Logged into {username}"}, 200
+                return {"result": f"Logged into {username}", "id": user.id}, 200
             else:
                 return {"result": f"User {username} not found"}, 404
-        elif "logout" in request.json:
-            pass
         elif "register" in request.json:
             username = request.json["register"]["username"]
             password = request.json["register"]["password"]
@@ -39,11 +38,42 @@ class UserAccount(Resource):
 
 
 class UserList(Resource):
-    def get(self, username, type):
+    def get(self, user_id, type):
         if type == "today":
-            pass
+            user = UserModel.query.filter_by(id=user_id).first()
+
+            watching = {}
+            for show in user.watching:
+                watching.update({int(show.show_id): show.show_title})
+
+            print(watching)
+
+            date = datetime.now()
+            day = date.weekday()
+
+            result = {"result": []}
+            airing_today = "start"
+
+            page = 1
+
+            while (
+                airing_today == "start" or airing_today["pagination"]["has_next_page"]
+            ):
+                airing_today = requests.get(
+                    f"https://api.jikan.moe/v4/schedules?filter={day_dict[day]}&page={page}"
+                ).json()
+
+                for airing_anime in airing_today["data"]:
+                    if airing_anime["mal_id"] in watching:
+                        result["result"].append(
+                            (airing_anime["title"], str(airing_anime["mal_id"]))
+                        )
+
+                    page += 1
+
+            return result
         elif type == "watchlist":
-            user = UserModel.query.filter_by(username=username).first()
+            user = UserModel.query.filter_by(id=user_id).first()
             result = {"data": []}
             for show in user.watching:
                 result["data"].append((f"{show.show_title}", f"ID: {show.show_id}"))
@@ -56,14 +86,13 @@ class UserList(Resource):
             season_anime = "start"
 
             while (
-                season_anime == "start"
-                or season_anime.json()["pagination"]["has_next_page"]
+                season_anime == "start" or season_anime["pagination"]["has_next_page"]
             ):
                 season_anime = requests.get(
                     f"https://api.jikan.moe/v4/seasons/now?page={page}&filter=tv"
-                )
+                ).json()
 
-                for anime in season_anime.json()["data"]:
+                for anime in season_anime["data"]:
                     result["anime"].append(
                         (
                             f"{anime["titles"][0]["title"]}",
@@ -77,9 +106,9 @@ class UserList(Resource):
 
 
 class UserAddDelete(Resource):
-    def post(self, username, type):
+    def post(self, user_id, type):
         add_shows = request.json["shows"]
-        user = UserModel.query.filter_by(username=username).first()
+        user = UserModel.query.filter_by(id=user_id).first()
         added = {"added": []}
         for anime_id in add_shows:
             anime = requests.get(
@@ -102,15 +131,15 @@ class UserAddDelete(Resource):
 
         return added
 
-    def delete(self, username, type):
+    def delete(self, user_id, type):
         if type == "clear":
-            user = UserModel.query.filter_by(username=username).first()
+            user = UserModel.query.filter_by(id=user_id).first()
             user.watching = []
             db.session.commit()
         elif type == "delete":
             delete_shows = request.json["shows"]
             deleted = {"deleted": []}
-            user = UserModel.query.filter_by(username=username).first()
+            user = UserModel.query.filter_by(id=user_id).first()
 
             for show in delete_shows:
                 exists = (
@@ -131,5 +160,5 @@ class UserAddDelete(Resource):
 
 
 api.add_resource(UserAccount, "/users/account")
-api.add_resource(UserList, "/users/list/<string:username>/<string:type>")
-api.add_resource(UserAddDelete, "/users/add/<string:username>/<string:type>")
+api.add_resource(UserList, "/users/list/<string:user_id>/<string:type>")
+api.add_resource(UserAddDelete, "/users/add/<string:user_id>/<string:type>")

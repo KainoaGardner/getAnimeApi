@@ -1,8 +1,8 @@
 from app import parser
 
-account = parser.add_argument_group("account")
-watchlist = parser.add_argument_group("lists")
-add_delete = parser.add_argument_group("add_delete")
+account = parser.add_argument_group("Account")
+watchlist = parser.add_argument_group("Lists")
+add_delete = parser.add_argument_group("Add_delete")
 
 account.add_argument(
     "-li",
@@ -30,7 +30,7 @@ watchlist.add_argument(
     const="t",
     type=str,
     choices=["today", "t", "watchlist", "wl", "all", "a"],
-    metavar=("type of list"),
+    metavar=("today, t, watchlist, wl, all, a"),
     help="list shows in list",
 )
 

@@ -11,8 +11,10 @@ if args.login:
         APIBASE + "users/account",
         json={"login": {"username": username, "password": password}},
     )
+
     if user_response.status_code != 404:
-        user_object = json.dumps({"user": {"username": username}})
+        user_id = user_response.json()["id"]
+        user_object = json.dumps({"user": {"username": username, "id": user_id}})
 
         with open("app/user.json", "w") as f:
             f.write(user_object)
@@ -51,12 +53,27 @@ elif args.list:
             print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
         else:
             username = json_object["user"]["username"]
+            user_id = json_object["user"]["id"]
 
             if "today" in args.list or "t" in args.list:
-                print("today")
+                user_response = requests.get(
+                    APIBASE + f"users/list/{user_id}/today"
+                ).json()
+
+                print(TerminalColor.BOLD + "---Airing Today---" + TerminalColor.END)
+                for count, anime in enumerate(user_response["result"]):
+                    print(
+                        TerminalColor.BOLD
+                        + f"{count + 1} ID: "
+                        + anime[1]
+                        + TerminalColor.END,
+                        end=" ",
+                    )
+                    print(anime[0])
+
             elif "watchlist" in args.list or "wl" in args.list:
                 user_response = requests.get(
-                    APIBASE + f"users/list/{username}/watchlist"
+                    APIBASE + f"users/list/{user_id}/watchlist"
                 )
                 print(
                     TerminalColor.BOLD + "---Watchlist---" + TerminalColor.END,
@@ -72,8 +89,8 @@ elif args.list:
                     print(anime[0])
 
             elif "all" in args.list or "a" in args.list:
-                print(TerminalColor.BOLD + "Getting Shows" + TerminalColor.END)
-                user_response = requests.get(APIBASE + f"users/list/{username}/all")
+                print(TerminalColor.BOLD + "---Getting Shows---" + TerminalColor.END)
+                user_response = requests.get(APIBASE + f"users/list/{user_id}/all")
                 for count, anime in enumerate(user_response.json()["anime"]):
                     print(
                         TerminalColor.BOLD
@@ -88,28 +105,28 @@ elif args.clear:
     with open("app/user.json", "r") as f:
         json_object = json.load(f)
         if "user" not in json_object:
-            print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
+            print(TerminalColor.BOLD + "---Not logged in---" + TerminalColor.END)
         else:
-            username = json_object["user"]["username"]
+            user_id = json_object["user"]["id"]
 
             result = requests.delete(
-                APIBASE + f"users/add/{username}/clear",
+                APIBASE + f"users/add/{user_id}/clear",
             )
 
-            print(TerminalColor.BOLD + "Watchlist cleared" + TerminalColor.END)
+            print(TerminalColor.BOLD + "---Watchlist cleared---" + TerminalColor.END)
 
 
 elif args.add:
     with open("app/user.json", "r") as f:
         json_object = json.load(f)
         if "user" not in json_object:
-            print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
+            print(TerminalColor.BOLD + "---Not logged in---" + TerminalColor.END)
         else:
-            username = json_object["user"]["username"]
+            user_id = json_object["user"]["id"]
 
             shows = args.add
             user_response = requests.post(
-                APIBASE + f"users/add/{username}/add",
+                APIBASE + f"users/add/{user_id}/add",
                 json={"shows": shows},
             ).json()
 
@@ -130,13 +147,13 @@ elif args.delete:
     with open("app/user.json", "r") as f:
         json_object = json.load(f)
         if "user" not in json_object:
-            print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
+            print(TerminalColor.BOLD + "---Not logged in---" + TerminalColor.END)
         else:
-            username = json_object["user"]["username"]
+            user_id = json_object["user"]["id"]
 
             shows = args.delete
             result = requests.delete(
-                APIBASE + f"users/add/{username}/delete", json={"shows": shows}
+                APIBASE + f"users/add/{user_id}/delete", json={"shows": shows}
             ).json()
 
             print(TerminalColor.BOLD + "---Deleted---" + TerminalColor.END)
