@@ -3,6 +3,7 @@ from app import parser
 account = parser.add_argument_group("Account")
 watchlist = parser.add_argument_group("Lists")
 add_delete = parser.add_argument_group("Add_delete")
+nyaa = parser.add_argument_group("Nyaa")
 
 account.add_argument(
     "-li",
@@ -54,4 +55,11 @@ add_delete.add_argument(
     "--clear",
     action="store_true",
     help="clear all shows in watchlist",
+)
+
+nyaa.add_argument(
+    "-n",
+    "--nyaa",
+    action="store_true",
+    help="open nyaa links for each show",
 )
