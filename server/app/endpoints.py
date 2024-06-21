@@ -8,6 +8,10 @@ from app import app, db, api
 from app.other import day_dict
 from app.tables import UserModel, WatchingModel
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options
+
 
 class UserAccount(Resource):
     def post(self):
@@ -40,38 +44,58 @@ class UserAccount(Resource):
 class UserList(Resource):
     def get(self, user_id, type):
         if type == "today":
-            user = UserModel.query.filter_by(id=user_id).first()
 
-            watching = {}
-            for show in user.watching:
-                watching.update({int(show.show_id): show.show_title})
+            today = date.today()
+            week = date(today.year, today.month, today.day).strftime("%V")
 
-            print(watching)
+            with open("server/weekly.json", "r") as f:
+                json_object = json.load(f)
+                if "week" not in json_object or json_object["week"] != str(week):
+                    # today = day_dict[date.today().weekday()]
+                    options = Options()
+                    options.add_argument("--headless")
+                    driver = webdriver.Firefox(options=options)
+                    driver.get("https://www.senpai.moe/?season=fall2024&mode=table")
 
-            date = datetime.now()
-            day = date.weekday()
+                    name = driver.find_elements(By.CLASS_NAME, "series_instance")
 
-            result = {"result": []}
-            airing_today = "start"
-
-            page = 1
-
-            while (
-                airing_today == "start" or airing_today["pagination"]["has_next_page"]
-            ):
-                airing_today = requests.get(
-                    f"https://api.jikan.moe/v4/schedules?filter={day_dict[day]}&page={page}"
-                ).json()
-
-                for airing_anime in airing_today["data"]:
-                    if airing_anime["mal_id"] in watching:
-                        result["result"].append(
-                            (airing_anime["title"], str(airing_anime["mal_id"]))
+                    weekly_object = {"week": week, "weekly": {}}
+                    for show in name:
+                        title = show.find_element(By.CLASS_NAME, "seriesTitle")
+                        airing_day = show.find_element(By.CLASS_NAME, "weekday")
+                        mal_id = show.find_element(By.LINK_TEXT, "MAL")
+                        mal_id = int(mal_id.get_attribute("href").split("/")[-1])
+                        weekly_object["weekly"].update(
+                            {
+                                mal_id: {
+                                    "title": title.text,
+                                    "airing_day": airing_day.text,
+                                }
+                            }
                         )
 
-                    page += 1
+                    with open("server/weekly.json", "w") as f:
+                        weekly_object = json.dumps(weekly_object)
+                        f.write(weekly_object)
+
+                    driver.quit()
+
+            result = {"result": []}
+            user = UserModel.query.filter_by(id=user_id).first()
+            day = day_dict[today.weekday()]
+
+            with open("server/weekly.json", "r") as f:
+                json_object = json.load(f)
+                for show in user.watching:
+                    show_id = show.show_id
+                    show_title = show.show_title
+                    if show_id in json_object["weekly"]:
+                        airing_day = json_object["weekly"][show_id]["airing_day"]
+                        if airing_day == str(day):
+                            result["result"].append([show_title, show_id])
 
             return result
+
         elif type == "watchlist":
             user = UserModel.query.filter_by(id=user_id).first()
             result = {"data": []}

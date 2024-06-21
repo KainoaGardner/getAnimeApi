@@ -1,9 +1,12 @@
 day_dict = {
-    0: "monday",
-    1: "tuesday",
-    2: "wendnesday",
-    3: "thursday",
-    4: "friday",
-    5: "saturday",
-    6: "sunday",
+    0: "Mon",
+    1: "Tue",
+    2: "Wed",
+    3: "Thu",
+    4: "Fri",
+    5: "Sat",
+    6: "Sun",
 }
+
+
+AUTHTOKEN = "UtpetlB5CCl3tG45LMTBKXB6PlrpAm"
