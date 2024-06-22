@@ -6,65 +6,87 @@ import json
 def clear(args):
     with open("app/user.json", "r") as f:
         json_object = json.load(f)
-        if "user" not in json_object:
-            print(TerminalColor.BOLD + "---Not logged in---" + TerminalColor.END)
+        if "token" not in json_object:
+            print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
         else:
-            user_id = json_object["user"]["id"]
+            token = json_object["token"]
+            headersAuth = {"Authorization": "Bearer " + token}
 
-            result = requests.delete(
-                APIBASE + f"users/add/{user_id}/clear",
-            )
+            user_response = requests.delete(
+                APIBASE + f"users/add/clear", headers=headersAuth
+            ).json()
 
-            print(TerminalColor.BOLD + "---Watchlist cleared---" + TerminalColor.END)
+            if user_response:
+                print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
+
+            else:
+
+                print(
+                    TerminalColor.BOLD + "---Watchlist cleared---" + TerminalColor.END
+                )
 
 
 def add(args):
     with open("app/user.json", "r") as f:
         json_object = json.load(f)
-        if "user" not in json_object:
-            print(TerminalColor.BOLD + "---Not logged in---" + TerminalColor.END)
+        if "token" not in json_object:
+            print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
         else:
-            user_id = json_object["user"]["id"]
+            token = json_object["token"]
+            headersAuth = {"Authorization": "Bearer " + token}
 
             shows = args.add
+
+            print(TerminalColor.BOLD + "---Adding---" + TerminalColor.END)
             user_response = requests.post(
-                APIBASE + f"users/add/{user_id}/add",
+                APIBASE + f"users/add/add",
                 json={"shows": shows},
+                headers=headersAuth,
             ).json()
 
-            print(TerminalColor.BOLD + "---Added---" + TerminalColor.END)
+            if "msg" in user_response:
+                print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
 
-            for count, anime in enumerate(user_response["added"]):
-                print(
-                    TerminalColor.BOLD
-                    + f"{count + 1} ID: "
-                    + anime[1]
-                    + TerminalColor.END,
-                    end=" ",
-                )
-                print(anime[0])
+            else:
+
+                for count, anime in enumerate(user_response["added"]):
+                    print(
+                        TerminalColor.BOLD
+                        + f"{count + 1} ID: "
+                        + anime[1]
+                        + TerminalColor.END,
+                        end=" ",
+                    )
+                    print(anime[0])
 
 
 def delete(args):
     with open("app/user.json", "r") as f:
         json_object = json.load(f)
-        if "user" not in json_object:
-            print(TerminalColor.BOLD + "---Not logged in---" + TerminalColor.END)
+        if "token" not in json_object:
+            print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
         else:
-            user_id = json_object["user"]["id"]
+            token = json_object["token"]
+            headersAuth = {"Authorization": "Bearer " + token}
+            print(TerminalColor.BOLD + "---Deleting---" + TerminalColor.END)
 
             shows = args.delete
-            result = requests.delete(
-                APIBASE + f"users/add/{user_id}/delete", json={"shows": shows}
+            user_response = requests.delete(
+                APIBASE + f"users/add/delete",
+                json={"shows": shows},
+                headers=headersAuth,
             ).json()
 
-            print(TerminalColor.BOLD + "---Deleted---" + TerminalColor.END)
-            for count, anime in enumerate(result["deleted"]):
-                print(
-                    TerminalColor.BOLD
-                    + f"{count + 1} ID: "
-                    + anime[1]
-                    + TerminalColor.END,
-                    end=" ",
-                )
-                print(anime[0])
+            if "msg" in user_response:
+                print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
+
+            else:
+                for count, anime in enumerate(user_response["deleted"]):
+                    print(
+                        TerminalColor.BOLD
+                        + f"{count + 1} ID: "
+                        + anime[1]
+                        + TerminalColor.END,
+                        end=" ",
+                    )
+                    print(anime[0])

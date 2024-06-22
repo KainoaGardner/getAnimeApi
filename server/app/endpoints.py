@@ -1,5 +1,6 @@
 from flask import request
 from flask_restful import Resource
+from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from app import api
 from app.functions.userlogin import *
@@ -21,9 +22,16 @@ class UserAccount(Resource):
 
             return register(username, password)
 
+    def delete(self):
+        username = request.json["delete"]["username"]
+        password = request.json["delete"]["password"]
+        return delete_user(username, password)
+
 
 class UserList(Resource):
-    def get(self, user_id, type):
+    @jwt_required()
+    def get(self, type):
+        user_id = get_jwt_identity()
         if type == "today":
             return list_today(user_id)
 
@@ -35,11 +43,15 @@ class UserList(Resource):
 
 
 class UserAddDelete(Resource):
-    def post(self, user_id, type):
+    @jwt_required()
+    def post(self, type):
+        user_id = get_jwt_identity()
         add_shows = request.json["shows"]
         return add(user_id, add_shows)
 
-    def delete(self, user_id, type):
+    @jwt_required()
+    def delete(self, type):
+        user_id = get_jwt_identity()
         if type == "clear":
             clear(user_id)
         elif type == "delete":
@@ -48,5 +60,5 @@ class UserAddDelete(Resource):
 
 
 api.add_resource(UserAccount, "/users/account")
-api.add_resource(UserList, "/users/list/<string:user_id>/<string:type>")
-api.add_resource(UserAddDelete, "/users/add/<string:user_id>/<string:type>")
+api.add_resource(UserList, "/users/list/<string:type>")
+api.add_resource(UserAddDelete, "/users/add/<string:type>")

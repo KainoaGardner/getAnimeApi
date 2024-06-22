@@ -16,6 +16,8 @@ elif args.logout:
 
 elif args.register:
     register(args)
+elif args.removeaccount:
+    delete_account(args)
 
 elif args.list:
     lists(args)

@@ -23,6 +23,13 @@ account.add_argument(
     metavar=("username", "password"),
     help="register account",
 )
+account.add_argument(
+    "-ra",
+    "--removeaccount",
+    nargs=2,
+    metavar=("username", "password"),
+    help="delete account",
+)
 
 watchlist.add_argument(
     "-l",

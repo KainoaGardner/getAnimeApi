@@ -1,13 +1,15 @@
 from app.tables import UserModel
-from app import db
+from app import db, jwt
+from flask_jwt_extended import create_access_token
 
 
 def login(username, password):
     user = UserModel.query.filter_by(username=username, password=password).first()
     if user:
-        return {"result": f"Logged into {username}", "id": user.id}, 200
+        token = create_access_token(identity=user.id)
+        return {"token": token}, 200
     else:
-        return {"result": f"User {username} not found"}, 404
+        return {"result": "not found"}, 404
 
 
 def register(username, password):
@@ -21,3 +23,14 @@ def register(username, password):
         db.session.commit()
 
         return {"result": f"{username} has been register"}, 200
+
+
+def delete_user(username, password):
+    user = UserModel.query.filter_by(username=username, password=password).first()
+
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        return {"result": f"{username} has been deleted"}, 200
+    else:
+        return {"result": f"Incorrect information"}, 404

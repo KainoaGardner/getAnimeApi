@@ -3,6 +3,7 @@ from app.other import day_dict
 from app.tables import UserModel
 
 from datetime import date
+from flask_jwt_extended import get_jwt_identity, jwt_required
 import json
 import requests
 
