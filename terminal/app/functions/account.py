@@ -46,7 +46,6 @@ def register(args):
 
 def delete_account(args):
     username, password = args.removeaccount
-    print(username, password)
     user_response = requests.delete(
         APIBASE + "users/account",
         json={"delete": {"username": username, "password": password}},

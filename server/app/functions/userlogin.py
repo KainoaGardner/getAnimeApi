@@ -1,15 +1,25 @@
 from app.tables import UserModel
 from app import db, jwt
+
 from flask_jwt_extended import create_access_token
+import bcrypt
 
 
 def login(username, password):
-    user = UserModel.query.filter_by(username=username, password=password).first()
+
+    user = UserModel.query.filter_by(username=username).first()
     if user:
-        token = create_access_token(identity=user.id)
-        return {"token": token}, 200
-    else:
-        return {"result": "not found"}, 404
+        data_password = user.password.encode("utf-8")
+
+        user_password = password
+        user_password_b = user_password.encode("utf-8")
+        result = bcrypt.checkpw(user_password_b, data_password)
+
+        if result:
+
+            token = create_access_token(identity=user.id)
+            return {"token": token}, 200
+    return {"result": "not found"}, 404
 
 
 def register(username, password):
@@ -18,7 +28,11 @@ def register(username, password):
     if exists:
         return {"result": f"Username {username} already taken"}, 404
     else:
-        user = UserModel(username=username, password=password)
+        bvalue = bytes(password, "utf-8")
+        temp_hash = bcrypt.hashpw(bvalue, bcrypt.gensalt())
+        hash = temp_hash.decode("utf-8")
+
+        user = UserModel(username=username, password=hash)
         db.session.add(user)
         db.session.commit()
 
@@ -26,11 +40,17 @@ def register(username, password):
 
 
 def delete_user(username, password):
-    user = UserModel.query.filter_by(username=username, password=password).first()
+    user = UserModel.query.filter_by(username=username).first()
 
     if user:
-        db.session.delete(user)
-        db.session.commit()
-        return {"result": f"{username} has been deleted"}, 200
-    else:
-        return {"result": f"Incorrect information"}, 404
+        data_password = user.password.encode("utf-8")
+
+        user_password = password
+        user_password_b = user_password.encode("utf-8")
+        result = bcrypt.checkpw(user_password_b, data_password)
+        if result:
+
+            db.session.delete(user)
+            db.session.commit()
+            return {"result": f"{username} has been deleted"}, 200
+    return {"result": f"Incorrect information"}, 404
