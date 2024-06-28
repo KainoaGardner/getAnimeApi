@@ -14,8 +14,12 @@ if args.login:
 elif args.logout:
     logout(args)
 
+elif args.user:
+    user()
+
 elif args.register:
     register(args)
+
 elif args.removeaccount:
     delete_account(args)
 
