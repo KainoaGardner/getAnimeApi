@@ -3,4 +3,5 @@ server/app/__pycache__
 terminal/.venv
 terminal/app/__pycache__
 server/app/functions/__pycache__
+server/app/web/__pycache__
 terminal/app/functions/__pycache__
