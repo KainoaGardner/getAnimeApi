@@ -24,6 +24,12 @@ account.add_argument(
     help="register account",
 )
 account.add_argument(
+    "-u",
+    "--user",
+    action="store_true",
+    help="show logged in user",
+)
+account.add_argument(
     "-ra",
     "--removeaccount",
     nargs=2,

@@ -21,6 +21,22 @@ def login(args):
         print(TerminalColor.BOLD + f"Incorrect information" + TerminalColor.END)
 
 
+def user():
+    with open("app/user.json", "r") as f:
+        json_object = json.load(f)
+        if "token" not in json_object:
+            print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
+        else:
+            token = json_object["token"]
+            headersAuth = {"Authorization": "Bearer " + token}
+            user_response = requests.get(
+                APIBASE + f"users/list/user", headers=headersAuth
+            ).json()
+            print(
+                TerminalColor.BOLD + f"Logged in as {user_response}" + TerminalColor.END
+            )
+
+
 def logout(args):
     with open("app/user.json", "r") as f:
         json_object = json.load(f)

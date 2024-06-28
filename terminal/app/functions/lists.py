@@ -68,7 +68,7 @@ def list_all(headersAuth):
         print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
 
     else:
-        for count, anime in enumerate(user_response["anime"]):
+        for count, anime in enumerate(user_response):
             print(
                 TerminalColor.BOLD + f"{count + 1} " + anime[1] + TerminalColor.END,
                 end=" ",
