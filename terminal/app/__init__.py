@@ -4,7 +4,7 @@ import argparse
 msg = "Terminal verison to checking daily airing anime"
 parser = argparse.ArgumentParser(description=msg)
 
-APIBASE = "http://127.0.0.1:5000/"
+APIBASE = "http://127.0.0.1:5000/api/"
 
 
 class TerminalColor:

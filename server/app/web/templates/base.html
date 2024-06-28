@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="static/base.css" />
+    {% block css %}{% endblock %}
+  </head>
+  <body>
+    <a class="nav_button" href="{{url_for('user')}}">User</a>
+    <a class="nav_button" href="{{url_for('login')}}">Login</a>
+    <a class="nav_button" href="{{url_for('register')}}">Register</a>
+    {% block content %}{% endblock %}
+  </body>
+</html>
