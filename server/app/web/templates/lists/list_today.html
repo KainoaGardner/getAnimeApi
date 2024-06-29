@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Airing Today{% endblock %} {% block
+css %} {% endblock %} {% block content %}
+
+<h1>{{user["username"]}}'s Airing Today</h1>
+<form action="nyaa" method="get">
+  <input type="submit" name="nyaa" value="nyaa" />
+</form>
+
+<ol>
+  {% for anime in airing_list["result"] %}
+  <li>
+    <p>ID: {{anime[1]}} {{anime[0]}}</p>
+    <form action="delete/{{anime[1]}}/today" method="post">
+      <input type="submit" name="delete" value="delete" />
+    </form>
+  </li>
+  {% endfor %}
+</ol>
+{% endblock %}

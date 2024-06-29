@@ -6,26 +6,27 @@ import json
 
 
 def lists(args):
-    with open("app/user.json", "r") as f:
-        json_object = json.load(f)
-        if "token" not in json_object:
-            print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
-        else:
-            token = json_object["token"]
-            headersAuth = {"Authorization": "Bearer " + token}
+    if "all" not in args.list and "a" not in args.list:
+        with open("app/user.json", "r") as f:
+            json_object = json.load(f)
+            if "token" not in json_object:
+                print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
+            else:
+                token = json_object["token"]
+                headersAuth = {"Authorization": "Bearer " + token}
 
-            if "today" in args.list or "t" in args.list:
-                list_today(headersAuth)
-            elif "watchlist" in args.list or "wl" in args.list:
-                list_watchlist(headersAuth)
-            elif "all" in args.list or "a" in args.list:
-                list_all(headersAuth)
+                if "today" in args.list or "t" in args.list:
+                    list_today(headersAuth)
+                elif "watchlist" in args.list or "wl" in args.list:
+                    list_watchlist(headersAuth)
+    else:
+        list_all()
 
 
 def list_today(headersAuth):
     print(TerminalColor.BOLD + "---Airing Today---" + TerminalColor.END)
     user_response = requests.get(
-        APIBASE + f"users/list/today", headers=headersAuth
+        APIBASE + f"users/list/token/today", headers=headersAuth
     ).json()
     if "msg" in user_response:
         print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
@@ -45,7 +46,7 @@ def list_watchlist(headersAuth):
     )
 
     user_response = requests.get(
-        APIBASE + f"users/list/watchlist", headers=headersAuth
+        APIBASE + f"users/list/token/watchlist", headers=headersAuth
     ).json()
     if "msg" in user_response:
         print(TerminalColor.BOLD + "---Not logged in---" + TerminalColor.END)
@@ -53,27 +54,25 @@ def list_watchlist(headersAuth):
     else:
         for count, anime in enumerate(user_response["data"]):
             print(
-                TerminalColor.BOLD + f"{count + 1} " + anime[1] + TerminalColor.END,
+                TerminalColor.BOLD + f"{count + 1} ID: " + anime[1] + TerminalColor.END,
                 end=" ",
             )
             print(anime[0])
 
 
-def list_all(headersAuth):
+def list_all():
     print(TerminalColor.BOLD + "---Getting Shows---" + TerminalColor.END)
-    user_response = requests.get(
-        APIBASE + f"users/list/all", headers=headersAuth
-    ).json()
-    if "msg" in user_response:
-        print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
-
-    else:
-        for count, anime in enumerate(user_response):
-            print(
-                TerminalColor.BOLD + f"{count + 1} " + anime[1] + TerminalColor.END,
-                end=" ",
-            )
-            print(anime[0])
+    user_response = requests.get(APIBASE + f"users/list").json()
+    # if "msg" in user_response:
+    #     print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
+    #
+    # else:
+    for count, anime in enumerate(user_response):
+        print(
+            TerminalColor.BOLD + f"{count + 1} ID: " + anime[1] + TerminalColor.END,
+            end=" ",
+        )
+        print(anime[0])
 
 
 def nyaa():

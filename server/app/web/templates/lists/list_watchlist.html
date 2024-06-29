@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% block title %}Watchlist{% endblock %} {% block css
+%} {% endblock %} {% block content %}
+
+<h1>{{user["username"]}}'s Watchlist</h1>
+<form action="clear" method="post">
+  <input type="submit" name="clear" value="Clear All" />
+</form>
+
+<ol>
+  {% for anime in watchlist["data"] %}
+  <li>
+    <p>ID: {{anime[1]}} {{anime[0]}}</p>
+    <form action="delete/{{anime[1]}}/watchlist" method="post">
+      <input type="submit" name="delete" value="delete" />
+    </form>
+  </li>
+  {% endfor %}
+</ol>
+{% endblock %}
