@@ -1,0 +1,10 @@
+{% extends "base.html" %} {% block title %}Clear{% endblock %} {% block css %}
+{% endblock %} {% block content %}
+
+<h1>Are you sure you want to clear your watchlist?</h1>
+<form action="" method="post">
+  <input type="submit" name="yes_clear" value="Clear" />
+  <input type="submit" name="no_clear" value="Don't Clear" />
+</form>
+
+{% endblock %}

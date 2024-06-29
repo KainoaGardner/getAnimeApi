@@ -3,7 +3,7 @@ import requests
 import json
 
 
-def clear(args):
+def clear():
     with open("app/user.json", "r") as f:
         json_object = json.load(f)
         if "token" not in json_object:

@@ -37,7 +37,7 @@ def user():
             )
 
 
-def logout(args):
+def logout():
     with open("app/user.json", "r") as f:
         json_object = json.load(f)
         if "token" in json_object:
@@ -55,9 +55,9 @@ def register(args):
     user_response = requests.post(
         APIBASE + "users/account",
         json={"register": {"username": username, "password": password}},
-    )
+    ).json()
 
-    print(TerminalColor.BOLD + user_response.json()["result"] + TerminalColor.END)
+    print(TerminalColor.BOLD + user_response["result"] + TerminalColor.END)
 
 
 def delete_account(args):

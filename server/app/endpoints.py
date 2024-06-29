@@ -28,7 +28,7 @@ class UserAccount(Resource):
         return delete_user(username, password)
 
 
-class UserList(Resource):
+class UserListToken(Resource):
     @jwt_required()
     def get(self, type):
         user_id = get_jwt_identity()
@@ -41,7 +41,12 @@ class UserList(Resource):
             return user(user_id)
 
         else:
-            return list_all()
+            return 404
+
+
+class UserList(Resource):
+    def get(self):
+        return list_all()
 
 
 class UserAddDelete(Resource):
@@ -61,6 +66,7 @@ class UserAddDelete(Resource):
             return delete(user_id, delete_shows)
 
 
-api.add_resource(UserAccount, "/users/account")
-api.add_resource(UserList, "/users/list/<string:type>")
-api.add_resource(UserAddDelete, "/users/add/<string:type>")
+api.add_resource(UserAccount, "/api/users/account")
+api.add_resource(UserListToken, "/api/users/list/token/<string:type>")
+api.add_resource(UserList, "/api/users/list/")
+api.add_resource(UserAddDelete, "/api/users/add/<string:type>")

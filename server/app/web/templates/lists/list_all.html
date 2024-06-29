@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block title %}Season{% endblock %}{% block css %}{%
+endblock %} {% block content %}
+
+<h1>Season</h1>
+<ol>
+  {% for anime in anime_list %}
+  <li>
+    <p>ID: {{anime[1]}} {{anime[0]}}</p>
+    <form action="add/{{anime[1]}}/all" method="post">
+      <input type="submit" name="add" value="add" />
+    </form>
+  </li>
+  {% endfor %}
+</ol>
+{% endblock %}

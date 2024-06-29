@@ -12,7 +12,7 @@ if args.login:
     login(args)
 
 elif args.logout:
-    logout(args)
+    logout()
 
 elif args.user:
     user()
@@ -27,7 +27,7 @@ elif args.list:
     lists(args)
 
 elif args.clear:
-    clear(args)
+    clear()
 
 elif args.add:
     add(args)

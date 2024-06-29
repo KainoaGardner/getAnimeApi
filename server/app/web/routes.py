@@ -1,5 +1,8 @@
 from flask import redirect, url_for, render_template, flash, session, request
+import requests
+
 from app import app, db
+from app.web import APIBASE
 
 
 @app.route("/home")
@@ -9,16 +12,44 @@ def home():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if "user" in session:
+        return redirect(url_for("user"))
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        user_response = requests.post(
+            APIBASE + "users/account",
+            json={"login": {"username": username, "password": password}},
+        )
+        if user_response.status_code != 404:
+            session["user"] = {
+                "username": username,
+                "token": user_response.json()["token"],
+            }
+
+            return redirect(url_for("user"))
     return render_template("login.html")
 
 
 @app.route("/logout")
 def logout():
-    return "logout"
+    session.pop("user", None)
+    return redirect(url_for("login"))
 
 
-@app.route("/register")
+@app.route("/register", methods=["GET", "POST"])
 def register():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        user_response = requests.post(
+            APIBASE + "users/account",
+            json={"register": {"username": username, "password": password}},
+        )
+        if user_response.status_code != 404:
+            return redirect(url_for("logout"))
+
     return render_template("register.html")
 
 
@@ -29,7 +60,11 @@ def delete_user():
 
 @app.route("/user")
 def user():
-    return render_template("user.html")
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = session["user"]
+
+    return render_template("user.html", user=user)
 
 
 # @app.route("/list")
@@ -40,32 +75,112 @@ def user():
 
 @app.route("/list/all")
 def list_all():
-    return render_template("lists/list_all.html")
+    user_response = requests.get(APIBASE + f"users/list").json()
+    return render_template("lists/list_all.html", anime_list=user_response)
 
 
 @app.route("/list/watchlist")
 def list_watchlist():
-    return render_template("lists/list_watchlist.html")
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    user = session["user"]
+    token = user["token"]
+    headersAuth = {"Authorization": "Bearer " + token}
+
+    watchlist = requests.get(
+        APIBASE + f"users/list/token/watchlist", headers=headersAuth
+    ).json()
+
+    return render_template("lists/list_watchlist.html", user=user, watchlist=watchlist)
 
 
 @app.route("/list/today")
 def list_today():
-    return render_template("lists/list_today.html")
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = session["user"]
+    token = user["token"]
+    headersAuth = {"Authorization": "Bearer " + token}
+
+    airing_list = requests.get(
+        APIBASE + f"users/list/token/today", headers=headersAuth
+    ).json()
+
+    return render_template("lists/list_today.html", user=user, airing_list=airing_list)
 
 
-@app.route("/add")
-def add():
-    return "added"
+@app.route("/list/add/<id>/<sent_from>", methods=["POST"])
+def add(id, sent_from):
+    if "user" not in session:
+
+        return redirect(url_for("login"))
+
+    user = session["user"]
+    token = user["token"]
+    headersAuth = {"Authorization": "Bearer " + token}
+
+    user_response = requests.post(
+        APIBASE + f"users/add/add",
+        json={"shows": [id]},
+        headers=headersAuth,
+    ).json()
+
+    if sent_from == "all":
+        return_page = "list_all"
+    elif sent_from == "watchlist":
+
+        return_page = "list_watchlist"
+    else:
+        return_page = "other"
+
+    return redirect(url_for(return_page))
 
 
-@app.route("/delete")
-def delete():
-    return "deleted"
+@app.route("/list/delete/<id>/<sent_from>", methods=["POST"])
+def delete(id, sent_from):
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    user = session["user"]
+    token = user["token"]
+    headersAuth = {"Authorization": "Bearer " + token}
+
+    user_response = requests.delete(
+        APIBASE + f"users/add/delete",
+        json={"shows": [id]},
+        headers=headersAuth,
+    ).json()
+
+    if sent_from == "watchlist":
+
+        return_page = "list_watchlist"
+    else:
+        return_page = "list_today"
+
+    return redirect(url_for(return_page))
 
 
-@app.route("/clear")
+@app.route("/list/clear", methods=["POST"])
 def clear():
-    return "cleared"
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    user = session["user"]
+    token = user["token"]
+    headersAuth = {"Authorization": "Bearer " + token}
+
+    if "yes_clear" in request.form:
+
+        user_response = requests.delete(
+            APIBASE + f"users/add/clear", headers=headersAuth
+        ).json()
+
+        return redirect(url_for("list_watchlist"))
+    elif "no_clear" in request.form:
+        return redirect(url_for("list_watchlist"))
+
+    return render_template("lists/list_clear.html")
 
 
 @app.route("/nyaa")

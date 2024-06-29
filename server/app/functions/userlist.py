@@ -45,7 +45,7 @@ def list_watchlist(user_id):
     user = UserModel.query.filter_by(id=user_id).first()
     result = {"data": []}
     for show in user.watching:
-        result["data"].append((f"{show.show_title}", f"ID: {show.show_id}"))
+        result["data"].append((f"{show.show_title}", f"{show.show_id}"))
 
     return result
 
@@ -94,7 +94,7 @@ def get_season_anime(week):
             result["anime"].append(
                 [
                     f"{anime["titles"][0]["title"]}",
-                    f"ID: {anime["mal_id"]}",
+                    f"{anime["mal_id"]}",
                 ]
             )
 
