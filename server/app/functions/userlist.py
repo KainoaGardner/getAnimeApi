@@ -24,7 +24,7 @@ def list_today(user_id):
 
 
 def get_airing(user_id, today):
-    result = {"result": []}
+    result = {"data": []}
     user = UserModel.query.filter_by(id=user_id).first()
     day = day_dict[today.weekday()]
 
@@ -33,10 +33,17 @@ def get_airing(user_id, today):
         for show in user.watching:
             show_id = show.show_id
             show_title = show.show_title
+            show_image = show.show_image
             if show_id in json_object["weekly"]:
                 airing_day = json_object["weekly"][show_id]["airing_day"]
                 if airing_day == str(day):
-                    result["result"].append([show_title, show_id])
+                    result["data"].append(
+                        {
+                            "title": show_title,
+                            "id": show_id,
+                            "image": show_image,
+                        }
+                    )
 
     return result
 
@@ -45,7 +52,17 @@ def list_watchlist(user_id):
     user = UserModel.query.filter_by(id=user_id).first()
     result = {"data": []}
     for show in user.watching:
-        result["data"].append((f"{show.show_title}", f"{show.show_id}"))
+        show_id = show.show_id
+        show_title = show.show_title
+        show_image = show.show_image
+
+        result["data"].append(
+            {
+                "title": show_title,
+                "id": show_id,
+                "image": show_image,
+            }
+        )
 
     return result
 
@@ -92,10 +109,11 @@ def get_season_anime(week):
 
         for anime in season_anime["data"]:
             result["anime"].append(
-                [
-                    f"{anime["titles"][0]["title"]}",
-                    f"{anime["mal_id"]}",
-                ]
+                {
+                    "title": anime["titles"][0]["title"],
+                    "id": anime["mal_id"],
+                    "image": anime["images"]["jpg"]["image_url"],
+                }
             )
 
         page += 1

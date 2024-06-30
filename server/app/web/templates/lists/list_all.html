@@ -5,8 +5,9 @@ endblock %} {% block content %}
 <ol>
   {% for anime in anime_list %}
   <li>
-    <p>ID: {{anime[1]}} {{anime[0]}}</p>
-    <form action="add/{{anime[1]}}/all" method="post">
+    <p>ID: {{anime["id"]}} {{anime["title"]}}</p>
+    <img src={{anime["image"]}}>
+    <form action="add/{{anime['id']}}/all" method="post">
       <input type="submit" name="add" value="add" />
     </form>
   </li>

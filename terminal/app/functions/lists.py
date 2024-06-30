@@ -32,12 +32,15 @@ def list_today(headersAuth):
         print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
 
     else:
-        for count, anime in enumerate(user_response["result"]):
+        for count, anime in enumerate(user_response["data"]):
             print(
-                TerminalColor.BOLD + f"{count + 1} ID: " + anime[1] + TerminalColor.END,
+                TerminalColor.BOLD
+                + f"{count + 1} ID: "
+                + anime["id"]
+                + TerminalColor.END,
                 end=" ",
             )
-            print(anime[0])
+            print(anime["title"])
 
 
 def list_watchlist(headersAuth):
@@ -54,25 +57,27 @@ def list_watchlist(headersAuth):
     else:
         for count, anime in enumerate(user_response["data"]):
             print(
-                TerminalColor.BOLD + f"{count + 1} ID: " + anime[1] + TerminalColor.END,
+                TerminalColor.BOLD
+                + f"{count + 1} ID: "
+                + anime["id"]
+                + TerminalColor.END,
                 end=" ",
             )
-            print(anime[0])
+            print(anime["title"])
 
 
 def list_all():
     print(TerminalColor.BOLD + "---Getting Shows---" + TerminalColor.END)
     user_response = requests.get(APIBASE + f"users/list").json()
-    # if "msg" in user_response:
-    #     print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
-    #
-    # else:
     for count, anime in enumerate(user_response):
         print(
-            TerminalColor.BOLD + f"{count + 1} ID: " + anime[1] + TerminalColor.END,
+            TerminalColor.BOLD
+            + f"{count + 1} ID: "
+            + str(anime["id"])
+            + TerminalColor.END,
             end=" ",
         )
-        print(anime[0])
+        print(anime["title"])
 
 
 def nyaa():

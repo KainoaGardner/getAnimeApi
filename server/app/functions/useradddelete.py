@@ -13,12 +13,15 @@ def add(user_id, add_shows):
         anime = requests.get(f"https://api.jikan.moe/v4/anime/{anime_id}/full").json()
         if "data" in anime:
             title = anime["data"]["titles"][0]["title"]
+            image = anime["data"]["images"]["jpg"]["image_url"]
             exists = (
                 WatchingModel.query.filter_by(show_id=anime_id, user_id=user.id).first()
                 is not None
             )
             if not exists:
-                anime_model = WatchingModel(show_id=anime_id, show_title=title)
+                anime_model = WatchingModel(
+                    show_id=anime_id, show_title=title, show_image=image
+                )
                 user.watching.append(anime_model)
                 db.session.add(anime_model)
                 added["added"].append((title, anime_id))

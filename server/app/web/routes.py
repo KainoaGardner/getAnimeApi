@@ -1,5 +1,7 @@
 from flask import redirect, url_for, render_template, flash, session, request
 import requests
+import webbrowser
+from PIL import Image
 
 from app import app, db
 from app.web import APIBASE
@@ -76,6 +78,7 @@ def user():
 @app.route("/list/all")
 def list_all():
     user_response = requests.get(APIBASE + f"users/list").json()
+    print(user_response)
     return render_template("lists/list_all.html", anime_list=user_response)
 
 
@@ -137,6 +140,26 @@ def add(id, sent_from):
     return redirect(url_for(return_page))
 
 
+@app.route("/list/add/id", methods=["POST"])
+def add_id():
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    user = session["user"]
+    token = user["token"]
+    headersAuth = {"Authorization": "Bearer " + token}
+
+    id = request.form["anime_id"]
+
+    user_response = requests.post(
+        APIBASE + f"users/add/add",
+        json={"shows": [id]},
+        headers=headersAuth,
+    ).json()
+
+    return redirect(url_for("list_watchlist"))
+
+
 @app.route("/list/delete/<id>/<sent_from>", methods=["POST"])
 def delete(id, sent_from):
     if "user" not in session:
@@ -183,6 +206,23 @@ def clear():
     return render_template("lists/list_clear.html")
 
 
-@app.route("/nyaa")
+@app.route("/list/nyaa")
 def nyaa():
-    return "nyaa"
+
+    if "user" not in session:
+        return redirect(url_for("login"))
+    user = session["user"]
+    token = user["token"]
+    headersAuth = {"Authorization": "Bearer " + token}
+
+    airing_list = requests.get(
+        APIBASE + f"users/list/token/today", headers=headersAuth
+    ).json()
+    if airing_list != "bad":
+        for anime in airing_list["result"]:
+            print(anime)
+            title = anime[0].lower()
+            title = title.replace(" ", "+")
+            webbrowser.open(f"https://nyaa.si/?f=0&c=0_0&q={title}&s=id&o=desc")
+
+    return redirect(url_for("list_today"))

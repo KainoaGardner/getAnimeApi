@@ -2,15 +2,24 @@
 %} {% endblock %} {% block content %}
 
 <h1>{{user["username"]}}'s Watchlist</h1>
-<form action="clear" method="post">
-  <input type="submit" name="clear" value="Clear All" />
+
+<form action="add/id" method="post">
+      <input type="number" name="anime_id" value="Enter MAL ID" required/>
+      <input type="submit" name="add" value="add" />
 </form>
+
+
+<form action="clear" method="post">
+  <input type="submit" name="clear" value="clear all" />
+</form>
+
 
 <ol>
   {% for anime in watchlist["data"] %}
   <li>
-    <p>ID: {{anime[1]}} {{anime[0]}}</p>
-    <form action="delete/{{anime[1]}}/watchlist" method="post">
+    <p>ID: {{anime["id"]}} {{anime["title"]}}</p>
+    <img src={{anime["image"]}}>
+    <form action="delete/{{anime['id']}}/watchlist" method="post">
       <input type="submit" name="delete" value="delete" />
     </form>
   </li>

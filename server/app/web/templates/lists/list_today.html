@@ -7,10 +7,11 @@ css %} {% endblock %} {% block content %}
 </form>
 
 <ol>
-  {% for anime in airing_list["result"] %}
+  {% for anime in airing_list["data"] %}
   <li>
-    <p>ID: {{anime[1]}} {{anime[0]}}</p>
-    <form action="delete/{{anime[1]}}/today" method="post">
+    <p>ID: {{anime["id"]}} {{anime["title"]}}</p>
+    <img src={{anime["image"]}}>
+    <form action="delete/{{anime['id']}}/today" method="post">
       <input type="submit" name="delete" value="delete" />
     </form>
   </li>
