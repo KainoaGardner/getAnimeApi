@@ -1,6 +1,19 @@
 {% extends "base.html" %} {% block title %}Watchlist{% endblock %} {% block css
-%} {% endblock %} {% block content %}
+%} 
 
+<link rel="stylesheet" href="../static/list.css" />
+
+{% if theme=="light" %}
+<link rel="stylesheet" href="../static/list_light.css" />
+{% else %}
+<link rel="stylesheet" href="../static/list_dark.css" />
+{% endif %}
+{% endblock %} {% block content %}
+
+
+<div class="body">
+
+<div class="sub_body light_body dark_body">
 <h1>{{user["username"]}}'s Watchlist</h1>
 
 <form action="add/id" method="post">
@@ -16,13 +29,19 @@
 
 <ol>
   {% for anime in watchlist["data"] %}
-  <li>
-    <p>ID: {{anime["id"]}} {{anime["title"]}}</p>
-    <img src={{anime["image"]}}>
-    <form action="delete/{{anime['id']}}/watchlist" method="post">
-      <input type="submit" name="delete" value="delete" />
+  <li class="anime_block dark_body light_body ">
+    <img class="list_image light_list_image dark_list_image" src={{anime["image"]}}>
+    <div class="anime_text_block">
+    <p class="anime_text anime_title" > {{anime["title"]}}</p>
+    <p class="anime_text">ID: {{anime["id"]}} </p>
+    </div>
+    <form class="anime_button" action="delete/{{anime['id']}}/watchlist" method="post">
+      <input type="submit" name="delete" value="Remove" />
     </form>
+
   </li>
   {% endfor %}
 </ol>
+</div>
+</div>
 {% endblock %}

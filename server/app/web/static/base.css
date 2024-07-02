@@ -1,0 +1,35 @@
+body {
+  margin-top: 15px;
+}
+a {
+  padding: 5px 5px;
+  border: solid;
+  border-width: 2px;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+li,
+ol {
+  margin: 0 0;
+  padding: 0 0;
+}
+
+/* .nav_button { */
+/* } */
+
+.links {
+  min-width: 700px;
+}
+
+.body {
+  margin-top: 20px;
+  padding: 0 0;
+}
+
+.sub_body {
+  padding: 10px 10px;
+  margin: 10px 0px;
+  /* border: solid; */
+  /* border-width: 3px; */
+}

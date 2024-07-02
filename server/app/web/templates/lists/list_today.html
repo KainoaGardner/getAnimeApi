@@ -1,5 +1,14 @@
 {% extends "base.html" %} {% block title %}Airing Today{% endblock %} {% block
-css %} {% endblock %} {% block content %}
+css %} 
+
+<link rel="stylesheet" href="../static/list.css" />
+
+{% if theme=="light" %}
+<link rel="stylesheet" href="../static/list_light.css" />
+{% else %}
+<link rel="stylesheet" href="../static/list_dark.css" />
+{% endif %}
+{% endblock %} {% block content %}
 
 <h1>{{user["username"]}}'s Airing Today</h1>
 <form action="nyaa" method="get">
@@ -8,13 +17,19 @@ css %} {% endblock %} {% block content %}
 
 <ol>
   {% for anime in airing_list["data"] %}
-  <li>
-    <p>ID: {{anime["id"]}} {{anime["title"]}}</p>
-    <img src={{anime["image"]}}>
-    <form action="delete/{{anime['id']}}/today" method="post">
-      <input type="submit" name="delete" value="delete" />
+  <li class="anime_block dark_body light_body sub_body">
+    <img class="list_image light_list_image dark_list_image" src={{anime["image"]}}>
+    <div class="anime_text_block">
+    <p class="anime_text anime_title" > {{anime["title"]}}</p>
+    <p class="anime_text">ID: {{anime["id"]}} </p>
+    </div>
+    <form class="anime_button" action="delete/{{anime['id']}}/today" method="post">
+      <input type="submit" name="delete" value="Remove" />
     </form>
+
   </li>
+
+
   {% endfor %}
 </ol>
 {% endblock %}

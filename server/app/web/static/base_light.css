@@ -1,0 +1,15 @@
+body {
+  background-color: #bdc3c7;
+  background-color: #ecf0f1;
+}
+
+a {
+  background-color: white;
+  border-color: #0c0c0c;
+  color: #0c0c0c;
+}
+
+.light_body {
+  background-color: #ecf0f1;
+  border-color: #0c0c0c;
+}

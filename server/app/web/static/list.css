@@ -1,0 +1,36 @@
+/* .anime_block { */
+/* } */
+
+.anime_block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5 5px;
+  margin: 10px 10px;
+  border: solid;
+  border-width: 3px;
+}
+.anime_text_block {
+  flex: 1 1 0;
+  padding: 10px 10px;
+}
+
+.anime_button {
+  padding: 10px 10px;
+}
+
+.list_image {
+  height: 150px;
+  width: 106px;
+  border-right: 3px solid;
+}
+
+.anime_text {
+  font-weight: 800;
+  padding: 0 0;
+  margin: 0 0;
+}
+.anime_title {
+  font-size: 20px;
+  margin-bottom: 5px;
+}

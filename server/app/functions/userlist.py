@@ -104,7 +104,7 @@ def get_season_anime(week):
     season_anime = "start"
     while season_anime == "start" or season_anime["pagination"]["has_next_page"]:
         season_anime = requests.get(
-            f"https://api.jikan.moe/v4/seasons/now?page={page}&filter=tv"
+            f"https://api.jikan.moe/v4/seasons/now?page={page}&sfw=true"
         ).json()
 
         for anime in season_anime["data"]:

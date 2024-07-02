@@ -1,4 +1,4 @@
-from app.tables import UserModel
+from app.tables import UserModel, WatchingModel
 from app import db, jwt
 
 from flask_jwt_extended import create_access_token
@@ -49,8 +49,11 @@ def delete_user(username, password):
         user_password_b = user_password.encode("utf-8")
         result = bcrypt.checkpw(user_password_b, data_password)
         if result:
-
+            user_watching = WatchingModel.query.filter_by(user_id=user.id).all()
+            for show in user_watching:
+                db.session.delete(show)
             db.session.delete(user)
             db.session.commit()
+
             return {"result": f"{username} has been deleted"}, 200
     return {"result": f"Incorrect information"}, 404

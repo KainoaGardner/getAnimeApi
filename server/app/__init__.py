@@ -4,7 +4,8 @@ from flask_restful import Api
 from flask_jwt_extended import JWTManager
 from datetime import timedelta
 
-app = Flask(__name__, template_folder="web/templates")
+app = Flask(__name__, template_folder="web/templates", static_folder="web/static")
+# app = Flask(__name__, template_folder="web/templates")
 api = Api(app)
 jwt = JWTManager(app)
 app.secret_key = "4e1243bd22c66e76c2ba9eddc1f91394e57f9f83"

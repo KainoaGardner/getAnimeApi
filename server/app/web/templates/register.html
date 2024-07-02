@@ -2,7 +2,8 @@
 <link rel="stylesheet" href="static/login.css" />
 {% endblock %} {% block content %}
 
-<div class="login_body">
+<div class="light_body dark_body body">
+  <div class="sub_body dark_body light_body">
   <h1>Register</h1>
   <hr />
   {% with messages = get_flashed_messages() %} {% if messages %} {% for message
@@ -17,6 +18,7 @@
     <input class="input_bar" type="password" name="password" required /><br />
     <input class="input_submit" type="submit" name="submit" value="Register" />
   </form>
+  </div>
 </div>
 
 {% endblock %}

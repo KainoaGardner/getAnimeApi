@@ -9,7 +9,8 @@ from app.web import APIBASE
 
 @app.route("/home")
 def home():
-    return render_template("base.html")
+    theme = session["theme"]
+    return render_template("home.html", theme=theme)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -31,7 +32,8 @@ def login():
             }
 
             return redirect(url_for("user"))
-    return render_template("login.html")
+    theme = session["theme"]
+    return render_template("login.html", theme=theme)
 
 
 @app.route("/logout")
@@ -55,9 +57,30 @@ def register():
     return render_template("register.html")
 
 
-@app.route("/delete_user")
+@app.route("/delete_user", methods=["GET", "POST"])
 def delete_user():
-    return redirect(url_for("login"))
+    if "user" not in session:
+        return redirect(url_for("login"))
+
+    if "yes_delete" in request.form:
+        username = request.form["username"]
+        password = request.form["password"]
+        if username != session["user"]["username"]:
+            print("test")
+            return redirect(url_for("delete_user"))
+
+        user_response = requests.delete(
+            APIBASE + f"users/account",
+            json={"delete": {"username": username, "password": password}},
+        )
+        if user_response != 404:
+            return redirect(url_for("logout"))
+        else:
+            return redirect(url_for("user"))
+    elif "no_delete" in request.form:
+        return redirect(url_for("user"))
+
+    return render_template("user_clear.html")
 
 
 @app.route("/user")
@@ -78,8 +101,8 @@ def user():
 @app.route("/list/all")
 def list_all():
     user_response = requests.get(APIBASE + f"users/list").json()
-    print(user_response)
-    return render_template("lists/list_all.html", anime_list=user_response)
+    theme = session["theme"]
+    return render_template("lists/list_all.html", anime_list=user_response, theme=theme)
 
 
 @app.route("/list/watchlist")
@@ -95,7 +118,10 @@ def list_watchlist():
         APIBASE + f"users/list/token/watchlist", headers=headersAuth
     ).json()
 
-    return render_template("lists/list_watchlist.html", user=user, watchlist=watchlist)
+    theme = session["theme"]
+    return render_template(
+        "lists/list_watchlist.html", user=user, watchlist=watchlist, theme=theme
+    )
 
 
 @app.route("/list/today")
@@ -110,7 +136,10 @@ def list_today():
         APIBASE + f"users/list/token/today", headers=headersAuth
     ).json()
 
-    return render_template("lists/list_today.html", user=user, airing_list=airing_list)
+    theme = session["theme"]
+    return render_template(
+        "lists/list_today.html", user=user, airing_list=airing_list, theme=theme
+    )
 
 
 @app.route("/list/add/<id>/<sent_from>", methods=["POST"])
@@ -226,3 +255,15 @@ def nyaa():
             webbrowser.open(f"https://nyaa.si/?f=0&c=0_0&q={title}&s=id&o=desc")
 
     return redirect(url_for("list_today"))
+
+
+@app.route("/theme")
+def theme():
+    if "theme" not in session:
+        session["theme"] = "light"
+    if session["theme"] == "dark":
+        session["theme"] = "light"
+    else:
+        session["theme"] = "dark"
+
+    return redirect(url_for("home"))
