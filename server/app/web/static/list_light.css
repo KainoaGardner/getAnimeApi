@@ -7,3 +7,25 @@
 
   border-color: #0c0c0c;
 }
+
+.light_button {
+  background-color: #ecf0f1;
+  border-color: #0c0c0c;
+
+  color: #0c0c0c;
+}
+
+.mal_link {
+  border-color: #0c0c0c;
+}
+
+.main_button {
+  background-color: white;
+}
+
+.light_link {
+  background-color: white;
+  border-color: #0c0c0c;
+
+  color: #0c0c0c;
+}

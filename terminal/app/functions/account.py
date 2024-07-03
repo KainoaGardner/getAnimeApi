@@ -30,7 +30,7 @@ def user():
             token = json_object["token"]
             headersAuth = {"Authorization": "Bearer " + token}
             user_response = requests.get(
-                APIBASE + f"users/list/user", headers=headersAuth
+                APIBASE + f"users/list/token/user", headers=headersAuth
             ).json()
             print(
                 TerminalColor.BOLD + f"Logged in as {user_response}" + TerminalColor.END

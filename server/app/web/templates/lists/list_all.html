@@ -10,21 +10,28 @@
 
 {%endblock %} {% block content %}
 
-<h1>Season</h1>
-<p>mal link</p>
+<div class="body">
+
+<div class="sub_body light_body dark_body">
+<div class="main_top">
+<h1 class="main_text">Current Season</h1>
+<a class="mal_link link_button" href="https://myanimelist.net/anime/season">Mal</a>
+</div>
 <ol>
   {% for anime in anime_list %}
-  <li class="anime_block dark_body light_body sub_body">
+  <li class="anime_block dark_body light_body ">
 
-    <img class="list_image light_list_image dark_list_image" src={{anime["image"]}}>
+    <img class="list_image light_list_image dark_list_image" src={{anime_list[anime]["image"]}}>
     <div class="anime_text_block">
-    <p class="anime_text anime_title" > {{anime["title"]}}</p>
-    <p class="anime_text">ID: {{anime["id"]}} </p>
+    <p class="anime_text anime_title" > {{anime_list[anime]["title"]}}</p>
+    <p class="anime_text">ID: {{anime}} </p>
     </div>
-    <form class="anime_button" action="add/{{anime['id']}}/all" method="post">
-      <input type="submit" name="add" value="Add" />
+    <form action="add/{{anime}}/all" method="post">
+      <input class="anime_button light_button dark_button" type="submit" name="add" value="Add" />
     </form>
   </li>
   {% endfor %}
 </ol>
+</div>
+</div>
 {% endblock %}

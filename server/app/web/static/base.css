@@ -15,9 +15,6 @@ ol {
   padding: 0 0;
 }
 
-/* .nav_button { */
-/* } */
-
 .links {
   min-width: 700px;
 }
@@ -28,8 +25,10 @@ ol {
 }
 
 .sub_body {
-  padding: 10px 10px;
+  /* padding: 10px 10px; */
   margin: 10px 0px;
-  /* border: solid; */
-  /* border-width: 3px; */
+}
+
+.bar {
+  margin: 15px 0;
 }

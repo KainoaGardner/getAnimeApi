@@ -1,8 +1,31 @@
 .dark_list_image {
-  border-color: #ecf0f1;
+  border-color: #8b8b8b;
+  /* background-color: #282828; */
 }
 
 .anime_block {
-  background-color: #3f3f3f;
-  border-color: #ecf0f1;
+  background-color: #282828;
+  border-color: #8b8b8b;
+}
+
+.dark_button {
+  background-color: #121212;
+  border-color: #8b8b8b;
+  color: white;
+}
+
+.dark_input {
+  background-color: #282828;
+  border-color: #8b8b8b;
+  color: white;
+}
+
+.main_button {
+  background-color: #282828;
+}
+
+.dark_link {
+  background-color: #282828;
+  border-color: #8b8b8b;
+  color: white;
 }

@@ -32,7 +32,7 @@ def register(username, password):
         temp_hash = bcrypt.hashpw(bvalue, bcrypt.gensalt())
         hash = temp_hash.decode("utf-8")
 
-        user = UserModel(username=username, password=hash)
+        user = UserModel(username=username, password=hash, dark_theme=False)
         db.session.add(user)
         db.session.commit()
 

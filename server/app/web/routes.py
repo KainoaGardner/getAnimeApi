@@ -9,6 +9,9 @@ from app.web import APIBASE
 
 @app.route("/home")
 def home():
+    if "theme" not in session:
+        session["theme"] = "light"
+
     theme = session["theme"]
     return render_template("home.html", theme=theme)
 
@@ -32,6 +35,9 @@ def login():
             }
 
             return redirect(url_for("user"))
+    if "theme" not in session:
+        session["theme"] = "light"
+
     theme = session["theme"]
     return render_template("login.html", theme=theme)
 
@@ -39,6 +45,11 @@ def login():
 @app.route("/logout")
 def logout():
     session.pop("user", None)
+    if "theme" not in session:
+        session["theme"] = "light"
+
+    theme = session["theme"]
+
     return redirect(url_for("login"))
 
 
@@ -54,7 +65,12 @@ def register():
         if user_response.status_code != 404:
             return redirect(url_for("logout"))
 
-    return render_template("register.html")
+    if "theme" not in session:
+        session["theme"] = "light"
+
+    theme = session["theme"]
+
+    return render_template("register.html", theme=theme)
 
 
 @app.route("/delete_user", methods=["GET", "POST"])
@@ -88,14 +104,12 @@ def user():
     if "user" not in session:
         return redirect(url_for("login"))
     user = session["user"]
+    if "theme" not in session:
+        session["theme"] = "light"
 
-    return render_template("user.html", user=user)
+    theme = session["theme"]
 
-
-# @app.route("/list")
-# def list():
-#     return render_template("list.html")
-#
+    return render_template("user.html", user=user, theme=theme)
 
 
 @app.route("/list/all")
@@ -118,6 +132,8 @@ def list_watchlist():
         APIBASE + f"users/list/token/watchlist", headers=headersAuth
     ).json()
 
+    if "theme" not in session:
+        session["theme"] = "light"
     theme = session["theme"]
     return render_template(
         "lists/list_watchlist.html", user=user, watchlist=watchlist, theme=theme
@@ -248,9 +264,8 @@ def nyaa():
         APIBASE + f"users/list/token/today", headers=headersAuth
     ).json()
     if airing_list != "bad":
-        for anime in airing_list["result"]:
-            print(anime)
-            title = anime[0].lower()
+        for anime in airing_list:
+            title = airing_list[anime]["title"].lower()
             title = title.replace(" ", "+")
             webbrowser.open(f"https://nyaa.si/?f=0&c=0_0&q={title}&s=id&o=desc")
 
@@ -266,4 +281,4 @@ def theme():
     else:
         session["theme"] = "dark"
 
-    return redirect(url_for("home"))
+    return redirect(url_for("user"))

@@ -1,6 +1,3 @@
-/* .anime_block { */
-/* } */
-
 .anime_block {
   display: flex;
   justify-content: space-between;
@@ -17,6 +14,19 @@
 
 .anime_button {
   padding: 10px 10px;
+  margin: 10px 10px;
+  border: 3px solid;
+  font-size: 15px;
+  font-weight: 600;
+  width: 100px;
+}
+.watchlist_input {
+  padding: 10px 10px;
+  margin: 10px 10px;
+  border: 3px solid;
+  font-size: 15px;
+  font-weight: 600;
+  width: 300px;
 }
 
 .list_image {
@@ -33,4 +43,38 @@
 .anime_title {
   font-size: 20px;
   margin-bottom: 5px;
+}
+
+.main_top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 10px;
+}
+
+.main_text {
+  text-align: center;
+  font-size: 50px;
+  padding: 0px 15px;
+  margin: 0 0;
+}
+
+.link_button {
+  text-align: center;
+  padding: 10px 10px;
+  margin: 10px 10px;
+  border: 3px solid;
+  font-size: 15px;
+  font-weight: 600;
+  width: 100px;
+  height: 19px;
+}
+.mal_link {
+  background-color: #3498db;
+  color: white;
+}
+
+.watchlist_main {
+  display: flex;
+  flex-direction: row;
 }

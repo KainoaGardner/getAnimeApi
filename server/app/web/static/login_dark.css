@@ -1,19 +1,13 @@
-body {
-  background-color: #121212;
-}
-
-a {
+.dark_input {
   background-color: #282828;
   border-color: #8b8b8b;
   color: white;
 }
 
-h1,
-p,
-label {
-  color: white;
-}
-
-.dark_body {
+.dark_button {
   background-color: #121212;
+
+  background-color: #282828;
+  border-color: #8b8b8b;
+  color: white;
 }

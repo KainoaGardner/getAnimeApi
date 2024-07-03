@@ -12,31 +12,34 @@
 
 
 <div class="body">
-
 <div class="sub_body light_body dark_body">
-<h1>{{user["username"]}}'s Watchlist</h1>
 
+<div class="main_top">
+<h1 class="main_text">{{user["username"]}}'s Watchlist</h1>
+
+<div class="watchlist_main">
 <form action="add/id" method="post">
-      <input type="number" name="anime_id" value="Enter MAL ID" required/>
-      <input type="submit" name="add" value="add" />
+      <input class="watchlist_input dark_input light_input" type="number" name="anime_id" value="Enter MAL ID" required/>
+      <input class="anime_button main_button dark_button light_button" type="submit" name="add" value="add" />
 </form>
-
 
 <form action="clear" method="post">
-  <input type="submit" name="clear" value="clear all" />
+  <input class="anime_button main_button dark_button light_button" type="submit" name="clear" value="clear all" />
 </form>
+</div>
+</div>
 
 
 <ol>
-  {% for anime in watchlist["data"] %}
+  {% for anime in watchlist %}
   <li class="anime_block dark_body light_body ">
-    <img class="list_image light_list_image dark_list_image" src={{anime["image"]}}>
+    <img class="list_image light_list_image dark_list_image" src={{ watchlist[anime]["image"]}}>
     <div class="anime_text_block">
-    <p class="anime_text anime_title" > {{anime["title"]}}</p>
-    <p class="anime_text">ID: {{anime["id"]}} </p>
+    <p class="anime_text anime_title" > {{watchlist[anime]["title"]}}</p>
+    <p class="anime_text">ID: {{anime}} </p>
     </div>
-    <form class="anime_button" action="delete/{{anime['id']}}/watchlist" method="post">
-      <input type="submit" name="delete" value="Remove" />
+    <form action="delete/{{anime}}/watchlist" method="post">
+      <input class="anime_button light_button dark_button" type="submit" name="delete" value="Remove" />
     </form>
 
   </li>

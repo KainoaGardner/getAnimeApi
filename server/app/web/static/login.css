@@ -1,0 +1,31 @@
+.input_main_block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.input_submit {
+  padding: 10px 10px;
+  margin: 10px 10px;
+  border: 3px solid;
+  font-size: 15px;
+  font-weight: 600;
+  width: 326px;
+}
+
+.input_bar {
+  padding: 10px 10px;
+  margin: 10px 10px;
+  border: 3px solid;
+  font-size: 15px;
+  font-weight: 600;
+  width: 300px;
+}
+
+.input_text {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: left;
+  margin: 10px 10px;
+}

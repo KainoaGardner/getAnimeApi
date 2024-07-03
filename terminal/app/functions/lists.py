@@ -32,15 +32,12 @@ def list_today(headersAuth):
         print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
 
     else:
-        for count, anime in enumerate(user_response["data"]):
+        for count, anime in enumerate(user_response):
             print(
-                TerminalColor.BOLD
-                + f"{count + 1} ID: "
-                + anime["id"]
-                + TerminalColor.END,
+                TerminalColor.BOLD + f"{count + 1} ID: " + anime + TerminalColor.END,
                 end=" ",
             )
-            print(anime["title"])
+            print(user_response[anime]["title"])
 
 
 def list_watchlist(headersAuth):
@@ -55,15 +52,12 @@ def list_watchlist(headersAuth):
         print(TerminalColor.BOLD + "---Not logged in---" + TerminalColor.END)
 
     else:
-        for count, anime in enumerate(user_response["data"]):
+        for count, anime in enumerate(user_response):
             print(
-                TerminalColor.BOLD
-                + f"{count + 1} ID: "
-                + anime["id"]
-                + TerminalColor.END,
+                TerminalColor.BOLD + f"{count + 1} ID: " + anime + TerminalColor.END,
                 end=" ",
             )
-            print(anime["title"])
+            print(user_response[anime]["title"])
 
 
 def list_all():
@@ -71,13 +65,10 @@ def list_all():
     user_response = requests.get(APIBASE + f"users/list").json()
     for count, anime in enumerate(user_response):
         print(
-            TerminalColor.BOLD
-            + f"{count + 1} ID: "
-            + str(anime["id"])
-            + TerminalColor.END,
+            TerminalColor.BOLD + f"{count + 1} ID: " + str(anime) + TerminalColor.END,
             end=" ",
         )
-        print(anime["title"])
+        print(user_response[anime]["title"])
 
 
 def nyaa():
@@ -93,17 +84,17 @@ def nyaa():
             airing_today = list_nyaa(headersAuth)
             if airing_today != "bad":
                 for anime in airing_today:
-                    title = anime[0].lower()
+                    title = airing_today[anime]["title"].lower()
                     title = title.replace(" ", "+")
                     webbrowser.open(f"https://nyaa.si/?f=0&c=0_0&q={title}&s=id&o=desc")
 
 
 def list_nyaa(headersAuth):
     user_response = requests.get(
-        APIBASE + f"users/list/today", headers=headersAuth
+        APIBASE + f"users/list/token/today", headers=headersAuth
     ).json()
     if "msg" in user_response:
         print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
         return "bad"
     else:
-        return user_response["result"]
+        return user_response

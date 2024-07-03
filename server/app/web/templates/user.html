@@ -1,7 +1,18 @@
-{% extends "base.html" %}{% block title %}User{% endblock %}{% block css %}{%
+{% extends "base.html" %}{% block title %}User{% endblock %}{% block css %}
+<link rel="stylesheet" href="../static/list.css" />
+{% if theme=="light" %}
+<link rel="stylesheet" href="../static/list_light.css" />
+{% else %}
+<link rel="stylesheet" href="../static/list_dark.css" />
+{% endif %}
+
+{%
 endblock %} {% block content %}
 
 <h1>{{user["username"]}}</h1>
+
+<a class="nav_button" href="{{url_for('theme')}}">Theme</a>
+
 <form action="delete_user" method="delete">
   <input type="submit" name="delete_user" value="Delete Account">
 </form>

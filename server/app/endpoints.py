@@ -39,7 +39,6 @@ class UserListToken(Resource):
             return list_watchlist(user_id)
         elif type == "user":
             return user(user_id)
-
         else:
             return 404
 

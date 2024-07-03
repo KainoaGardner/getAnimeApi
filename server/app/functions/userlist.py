@@ -1,6 +1,6 @@
 from app.functions.webscraper import webscrape
 from app.other import day_dict
-from app.tables import UserModel
+from app.tables import UserModel, WatchingModel
 
 from datetime import date
 from flask_jwt_extended import get_jwt_identity, jwt_required
@@ -24,8 +24,10 @@ def list_today(user_id):
 
 
 def get_airing(user_id, today):
-    result = {"data": []}
+    result = {"data": {}}
     user = UserModel.query.filter_by(id=user_id).first()
+    if not user:
+        return {"msg": "log in"}
     day = day_dict[today.weekday()]
 
     with open("server/weekly.json", "r") as f:
@@ -37,34 +39,24 @@ def get_airing(user_id, today):
             if show_id in json_object["weekly"]:
                 airing_day = json_object["weekly"][show_id]["airing_day"]
                 if airing_day == str(day):
-                    result["data"].append(
-                        {
-                            "title": show_title,
-                            "id": show_id,
-                            "image": show_image,
-                        }
+                    result["data"].update(
+                        {show_id: {"title": show_title, "image": show_image}}
                     )
 
-    return result
+    return result["data"]
 
 
 def list_watchlist(user_id):
     user = UserModel.query.filter_by(id=user_id).first()
-    result = {"data": []}
+    result = {"data": {}}
     for show in user.watching:
         show_id = show.show_id
         show_title = show.show_title
         show_image = show.show_image
 
-        result["data"].append(
-            {
-                "title": show_title,
-                "id": show_id,
-                "image": show_image,
-            }
-        )
+        result["data"].update({show_id: {"title": show_title, "image": show_image}})
 
-    return result
+    return result["data"]
 
 
 def get_season():
@@ -94,11 +86,11 @@ def list_all():
 
     with open("server/season.json", "r") as f:
         json_object = json.load(f)
-        return json_object["anime"]
+        return json_object["data"]
 
 
 def get_season_anime(week):
-    result = {"week": week, "anime": []}
+    result = {"week": week, "data": {}}
 
     page = 1
     season_anime = "start"
@@ -108,11 +100,12 @@ def get_season_anime(week):
         ).json()
 
         for anime in season_anime["data"]:
-            result["anime"].append(
+            result["data"].update(
                 {
-                    "title": anime["titles"][0]["title"],
-                    "id": anime["mal_id"],
-                    "image": anime["images"]["jpg"]["image_url"],
+                    anime["mal_id"]: {
+                        "title": anime["titles"][0]["title"],
+                        "image": anime["images"]["jpg"]["image_url"],
+                    }
                 }
             )
 

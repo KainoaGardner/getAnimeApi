@@ -10,21 +10,31 @@ css %}
 {% endif %}
 {% endblock %} {% block content %}
 
-<h1>{{user["username"]}}'s Airing Today</h1>
+
+<div class="body">
+
+<div class="sub_body light_body dark_body">
+
+<div class="main_top">
+<h1 class="main_text">{{user["username"]}}'s Airing Today</h1>
+<div class="watchlist_main main_buttons">
 <form action="nyaa" method="get">
-  <input type="submit" name="nyaa" value="nyaa" />
+  <input class="anime_button main_button dark_button light_button" type="submit" name="nyaa" value="nyaa" />
 </form>
+<a class="link_button dark_link light_link" href="https://www.senpai.moe/?mode=table">Weekly</a>
+</div>
+</div>
 
 <ol>
-  {% for anime in airing_list["data"] %}
-  <li class="anime_block dark_body light_body sub_body">
-    <img class="list_image light_list_image dark_list_image" src={{anime["image"]}}>
+  {% for anime in airing_list %}
+  <li class="anime_block dark_body light_body ">
+    <img class="list_image light_list_image dark_list_image" src={{airing_list[anime]["image"]}}>
     <div class="anime_text_block">
-    <p class="anime_text anime_title" > {{anime["title"]}}</p>
-    <p class="anime_text">ID: {{anime["id"]}} </p>
+    <p class="anime_text anime_title" > {{airing_list[anime]["title"]}}</p>
+    <p class="anime_text">ID: {{anime}} </p>
     </div>
-    <form class="anime_button" action="delete/{{anime['id']}}/today" method="post">
-      <input type="submit" name="delete" value="Remove" />
+    <form action="delete/{{anime}}/today" method="post">
+      <input class="anime_button light_button dark_button" type="submit" name="delete" value="Remove" />
     </form>
 
   </li>
@@ -32,4 +42,6 @@ css %}
 
   {% endfor %}
 </ol>
+</div>
+</div>
 {% endblock %}
