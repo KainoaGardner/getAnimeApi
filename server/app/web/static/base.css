@@ -32,3 +32,11 @@ ol {
 .bar {
   margin: 15px 0;
 }
+
+.link2_button {
+  text-align: center;
+  padding: 10px 10px;
+  border: 3px solid;
+  font-size: 15px;
+  font-weight: 600;
+}

@@ -1,10 +1,27 @@
 {% extends "base.html" %} {% block title %}Clear{% endblock %} {% block css %}
+<link rel="stylesheet" href="/static/login.css" />
+<link rel="stylesheet" href="../static/list.css" />
+{% if theme=="light" %}
+<link rel="stylesheet" href="../static/login_light.css" />
+{% else %}
+<link rel="stylesheet" href="../static/login_dark.css" />
+{% endif %}
+
+
 {% endblock %} {% block content %}
 
-<h1>Are you sure you want to clear your watchlist?</h1>
+<div class="light_body dark_body body">
+<div class="sub_body dark_body light_body">
+
+<h1 class="main_text">Are you sure you want to clear your watchlist?</h1>
+
+<div class="input_main_block">
 <form action="" method="post">
-  <input type="submit" name="yes_clear" value="Clear" />
-  <input type="submit" name="no_clear" value="Don't Clear" />
+  <input class="input_submit dark_button light_button" type="submit" name="yes_clear" value="Clear" />
+  <input class="input_submit dark_button light_button" type="submit" name="no_clear" value="Don't Clear" />
 </form>
+</div>
+</div>
+</div>
 
 {% endblock %}

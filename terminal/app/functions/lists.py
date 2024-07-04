@@ -34,9 +34,15 @@ def list_today(headersAuth):
     else:
         for count, anime in enumerate(user_response):
             print(
-                TerminalColor.BOLD + f"{count + 1} ID: " + anime + TerminalColor.END,
+                TerminalColor.BOLD
+                + f"{count + 1} ID: "
+                + anime
+                + " "
+                + user_response[anime]["ep_count"]
+                + TerminalColor.END,
                 end=" ",
             )
+
             print(user_response[anime]["title"])
 
 
@@ -98,3 +104,7 @@ def list_nyaa(headersAuth):
         return "bad"
     else:
         return user_response
+
+
+def get_week():
+    user_response = requests.post(APIBASE + f"users/list/").json()

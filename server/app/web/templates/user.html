@@ -11,10 +11,9 @@ endblock %} {% block content %}
 
 <h1>{{user["username"]}}</h1>
 
-<a class="nav_button" href="{{url_for('theme')}}">Theme</a>
 
 <form action="delete_user" method="delete">
-  <input type="submit" name="delete_user" value="Delete Account">
+  <input class="link2_button" type="submit" name="delete_user" value="Delete Account">
 </form>
 
 {% endblock %}

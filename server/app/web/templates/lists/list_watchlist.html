@@ -15,7 +15,7 @@
 <div class="sub_body light_body dark_body">
 
 <div class="main_top">
-<h1 class="main_text">{{user["username"]}}'s Watchlist</h1>
+  <h1 class="main_text">{{user["username"]}}'s Watchlist ({{count}})</h1>
 
 <div class="watchlist_main">
 <form action="add/id" method="post">
@@ -38,7 +38,7 @@
     <p class="anime_text anime_title" > {{watchlist[anime]["title"]}}</p>
     <p class="anime_text">ID: {{anime}} </p>
     </div>
-    <form action="delete/{{anime}}/watchlist" method="post">
+    <form action="delete/{{anime}}" method="post">
       <input class="anime_button light_button dark_button" type="submit" name="delete" value="Remove" />
     </form>
 

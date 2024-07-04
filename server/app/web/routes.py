@@ -135,8 +135,13 @@ def list_watchlist():
     if "theme" not in session:
         session["theme"] = "light"
     theme = session["theme"]
+    count = len(watchlist)
     return render_template(
-        "lists/list_watchlist.html", user=user, watchlist=watchlist, theme=theme
+        "lists/list_watchlist.html",
+        user=user,
+        watchlist=watchlist,
+        theme=theme,
+        count=count,
     )
 
 
@@ -153,13 +158,19 @@ def list_today():
     ).json()
 
     theme = session["theme"]
+
+    count = len(airing_list)
     return render_template(
-        "lists/list_today.html", user=user, airing_list=airing_list, theme=theme
+        "lists/list_today.html",
+        user=user,
+        airing_list=airing_list,
+        theme=theme,
+        count=count,
     )
 
 
-@app.route("/list/add/<id>/<sent_from>", methods=["POST"])
-def add(id, sent_from):
+@app.route("/list/add/<id>", methods=["POST"])
+def add(id):
     if "user" not in session:
 
         return redirect(url_for("login"))
@@ -174,15 +185,7 @@ def add(id, sent_from):
         headers=headersAuth,
     ).json()
 
-    if sent_from == "all":
-        return_page = "list_all"
-    elif sent_from == "watchlist":
-
-        return_page = "list_watchlist"
-    else:
-        return_page = "other"
-
-    return redirect(url_for(return_page))
+    return redirect(request.referrer)
 
 
 @app.route("/list/add/id", methods=["POST"])
@@ -202,11 +205,11 @@ def add_id():
         headers=headersAuth,
     ).json()
 
-    return redirect(url_for("list_watchlist"))
+    return redirect(request.referrer)
 
 
-@app.route("/list/delete/<id>/<sent_from>", methods=["POST"])
-def delete(id, sent_from):
+@app.route("/list/delete/<id>", methods=["POST"])
+def delete(id):
     if "user" not in session:
         return redirect(url_for("login"))
 
@@ -220,13 +223,7 @@ def delete(id, sent_from):
         headers=headersAuth,
     ).json()
 
-    if sent_from == "watchlist":
-
-        return_page = "list_watchlist"
-    else:
-        return_page = "list_today"
-
-    return redirect(url_for(return_page))
+    return redirect(request.referrer)
 
 
 @app.route("/list/clear", methods=["POST"])
@@ -245,6 +242,7 @@ def clear():
         ).json()
 
         return redirect(url_for("list_watchlist"))
+
     elif "no_clear" in request.form:
         return redirect(url_for("list_watchlist"))
 
@@ -269,7 +267,7 @@ def nyaa():
             title = title.replace(" ", "+")
             webbrowser.open(f"https://nyaa.si/?f=0&c=0_0&q={title}&s=id&o=desc")
 
-    return redirect(url_for("list_today"))
+    return redirect(request.referrer)
 
 
 @app.route("/theme")
@@ -281,4 +279,4 @@ def theme():
     else:
         session["theme"] = "dark"
 
-    return redirect(url_for("user"))
+    return redirect(request.referrer)

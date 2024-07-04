@@ -2,32 +2,43 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options
 import json
+import time
 
 
 def webscrape(week):
-
-    # today = day_dict[date.today().weekday()]
     options = Options()
     options.add_argument("--headless")
     driver = webdriver.Firefox(options=options)
-    driver.get("https://www.senpai.moe/?season=fall2024&mode=table")
+    driver.get("https://www.livechart.me/schedule")
 
-    name = driver.find_elements(By.CLASS_NAME, "series_instance")
+    driver.find_element(By.XPATH, '//*[@title="Full Layout"]').click()
 
     weekly_object = {"week": week, "weekly": {}}
-    for show in name:
-        title = show.find_element(By.CLASS_NAME, "seriesTitle")
-        airing_day = show.find_element(By.CLASS_NAME, "weekday")
-        mal_id = show.find_element(By.LINK_TEXT, "MAL")
-        mal_id = int(mal_id.get_attribute("href").split("/")[-1])
-        weekly_object["weekly"].update(
-            {
-                mal_id: {
-                    "title": title.text,
-                    "airing_day": airing_day.text,
-                }
-            }
-        )
+    days = driver.find_elements(By.CLASS_NAME, "text-2xl")
+    day_blocks = driver.find_elements(By.CLASS_NAME, "lc-grid-template-anime-cards")
+    for count, day in enumerate(days[1:]):
+        try:
+            day_block = day_blocks[count]
+            anime_lists = day_block.find_elements(By.CLASS_NAME, "lc-anime-card")
+
+            for anime in anime_lists:
+                anime_title = anime.find_element(By.CLASS_NAME, "lc-anime-card--title")
+                mal_id = anime.find_element(By.CLASS_NAME, "mal")
+                mal_id = int(mal_id.get_attribute("href").split("/")[-1])
+                ep_count = anime.find_element(By.CLASS_NAME, "font-medium")
+
+                print(anime_title.text, mal_id, ep_count.text)
+                weekly_object["weekly"].update(
+                    {
+                        mal_id: {
+                            "title": anime_title.text,
+                            "airing_day": day.text,
+                            "ep_count": ep_count.text,
+                        }
+                    }
+                )
+        except:
+            continue
 
     with open("server/weekly.json", "w") as f:
         weekly_object = json.dumps(weekly_object)

@@ -47,6 +47,9 @@ class UserList(Resource):
     def get(self):
         return list_all()
 
+    def post(self):
+        return webscrape(0)
+
 
 class UserAddDelete(Resource):
     @jwt_required()

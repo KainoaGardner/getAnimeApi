@@ -38,9 +38,16 @@ def get_airing(user_id, today):
             show_image = show.show_image
             if show_id in json_object["weekly"]:
                 airing_day = json_object["weekly"][show_id]["airing_day"]
+                ep_count = json_object["weekly"][show_id]["ep_count"]
                 if airing_day == str(day):
                     result["data"].update(
-                        {show_id: {"title": show_title, "image": show_image}}
+                        {
+                            show_id: {
+                                "title": show_title,
+                                "image": show_image,
+                                "ep_count": ep_count,
+                            }
+                        }
                     )
 
     return result["data"]

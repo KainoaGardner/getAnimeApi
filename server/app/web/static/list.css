@@ -20,6 +20,7 @@
   font-weight: 600;
   width: 100px;
 }
+
 .watchlist_input {
   padding: 10px 10px;
   margin: 10px 10px;
@@ -55,6 +56,13 @@
 .main_text {
   text-align: center;
   font-size: 50px;
+  padding: 0px 15px;
+  margin: 0 0;
+}
+
+.sub_text {
+  text-align: center;
+  font-size: 25px;
   padding: 0px 15px;
   margin: 0 0;
 }
