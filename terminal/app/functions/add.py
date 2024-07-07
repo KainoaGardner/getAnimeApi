@@ -49,15 +49,15 @@ def add(args):
 
             else:
 
-                for count, anime in enumerate(user_response["added"]):
+                for count, anime in enumerate(user_response):
                     print(
                         TerminalColor.BOLD
                         + f"{count + 1} ID: "
-                        + anime[1]
+                        + anime
                         + TerminalColor.END,
                         end=" ",
                     )
-                    print(anime[0])
+                    print(user_response[anime]["title"])
 
 
 def delete(args):
@@ -81,12 +81,12 @@ def delete(args):
                 print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
 
             else:
-                for count, anime in enumerate(user_response["deleted"]):
+                for count, anime in enumerate(user_response):
                     print(
                         TerminalColor.BOLD
                         + f"{count + 1} ID: "
-                        + anime[1]
+                        + anime
                         + TerminalColor.END,
                         end=" ",
                     )
-                    print(anime[0])
+                    print(user_response[anime]["title"])

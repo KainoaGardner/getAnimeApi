@@ -8,7 +8,7 @@ import requests
 
 def add(user_id, add_shows):
     user = UserModel.query.filter_by(id=user_id).first()
-    added = {"added": []}
+    added = {"added": {}}
     for anime_id in add_shows:
         anime = requests.get(f"https://api.jikan.moe/v4/anime/{anime_id}/full").json()
         if "data" in anime:
@@ -24,10 +24,12 @@ def add(user_id, add_shows):
                 )
                 user.watching.append(anime_model)
                 db.session.add(anime_model)
-                added["added"].append((title, anime_id))
-    db.session.commit()
+                added["added"].update({anime_id: {"title": title}})
 
-    return added
+    db.session.commit()
+    print(added)
+
+    return added["added"]
 
 
 def clear(user_id):
@@ -37,7 +39,7 @@ def clear(user_id):
 
 
 def delete(user_id, delete_shows):
-    deleted = {"deleted": []}
+    deleted = {"deleted": {}}
     user = UserModel.query.filter_by(id=user_id).first()
 
     for show in delete_shows:
@@ -49,8 +51,8 @@ def delete(user_id, delete_shows):
         if exists:
             anime = WatchingModel.query.filter_by(show_id=show, user_id=user.id).first()
 
-            deleted["deleted"].append((anime.show_title, anime.show_id))
+            deleted["deleted"].update({anime.show_id: {"title": anime.show_title}})
             db.session.delete(anime)
 
     db.session.commit()
-    return deleted
+    return deleted["deleted"]

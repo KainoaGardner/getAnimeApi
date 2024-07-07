@@ -40,3 +40,10 @@ ol {
   font-size: 15px;
   font-weight: 600;
 }
+
+.error {
+  font-size: 15px;
+  font-weight: 600;
+  color: red;
+  text-align: center;
+}

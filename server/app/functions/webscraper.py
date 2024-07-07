@@ -17,17 +17,18 @@ def webscrape(week):
     days = driver.find_elements(By.CLASS_NAME, "text-2xl")
     day_blocks = driver.find_elements(By.CLASS_NAME, "lc-grid-template-anime-cards")
     for count, day in enumerate(days[1:]):
-        try:
-            day_block = day_blocks[count]
-            anime_lists = day_block.find_elements(By.CLASS_NAME, "lc-anime-card")
+        day_block = day_blocks[count]
+        anime_lists = day_block.find_elements(By.CLASS_NAME, "lc-anime-card")
 
-            for anime in anime_lists:
+        for anime in anime_lists:
+
+            try:
                 anime_title = anime.find_element(By.CLASS_NAME, "lc-anime-card--title")
                 mal_id = anime.find_element(By.CLASS_NAME, "mal")
                 mal_id = int(mal_id.get_attribute("href").split("/")[-1])
                 ep_count = anime.find_element(By.CLASS_NAME, "font-medium")
+                print(anime_title.text)
 
-                print(anime_title.text, mal_id, ep_count.text)
                 weekly_object["weekly"].update(
                     {
                         mal_id: {
@@ -37,8 +38,8 @@ def webscrape(week):
                         }
                     }
                 )
-        except:
-            continue
+            except:
+                continue
 
     with open("server/weekly.json", "w") as f:
         weekly_object = json.dumps(weekly_object)

@@ -17,7 +17,6 @@
   </head>
   <body>
     <div class="links">
-    <!-- <a class="nav_button" href="{{url_for('home')}}">Home</a> -->
     <a class="nav_button" href="{{url_for('user')}}">User</a>
     <a class="nav_button" href="{{url_for('list_today')}}">Airing</a>
     <a class="nav_button" href="{{url_for('list_watchlist')}}">Watchlist</a>
@@ -28,6 +27,12 @@
 
     <a class="nav_button" href="{{url_for('theme')}}">Theme</a>
     <hr class="bar">
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for message
+  in messages %}
+  <p class="error">{{message}}</p>
+  {% endfor %} {% endif %}{% endwith %}
+
+
     {% block content %}{% endblock %}
     </div>
   </body>

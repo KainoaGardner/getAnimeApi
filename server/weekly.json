@@ -1,108 +1,6 @@
 {
   "week": "27",
   "weekly": {
-    "48418": {
-      "title": "Maou Gakuin no Futekigousha \u2161 Cour 2",
-      "airing_day": "Wed",
-      "ep_count": "EP11"
-    },
-    "57876": {
-      "title": "Maougun Saikyou no Majutsushi wa Ningen datta",
-      "airing_day": "Wed",
-      "ep_count": "EP2"
-    },
-    "55791": {
-      "title": "\u3010OSHI NO KO\u30112nd Season",
-      "airing_day": "Wed",
-      "ep_count": "EP1"
-    },
-    "58426": {
-      "title": "Shikanoko Nokonoko Koshitantan",
-      "airing_day": "Wed",
-      "ep_count": "EP1"
-    },
-    "54744": {
-      "title": "Tokidoki Bosotto Russia-go de Dereru Tonari no Alya-san",
-      "airing_day": "Wed",
-      "ep_count": "EP1"
-    },
-    "50250": { "title": "Chiikawa", "airing_day": "Thu", "ep_count": "EP182" },
-    "58883": {
-      "title": "DEAD DEAD DEMONS DEDEDEDE DESTRUCTION (Series)",
-      "airing_day": "Thu",
-      "ep_count": "EP6"
-    },
-    "54968": { "title": "Giji Harem", "airing_day": "Thu", "ep_count": "EP1" },
-    "52481": {
-      "title": "Gimai Seikatsu",
-      "airing_day": "Thu",
-      "ep_count": "EP1"
-    },
-    "57892": {
-      "title": "Hazurewaku no \"Joutai Ijou Skill\" de Saikyou ni Natta Ore ga Subete wo Juurin suru made",
-      "airing_day": "Thu",
-      "ep_count": "EP1"
-    },
-    "56853": {
-      "title": "I.CINNAMOROLL Animation",
-      "airing_day": "Thu",
-      "ep_count": "EP38"
-    },
-    "57753": {
-      "title": "Jantama Kan!!",
-      "airing_day": "Thu",
-      "ep_count": "EP11"
-    },
-    "55749": {
-      "title": "Megami no Cafe Terrace 2nd Season",
-      "airing_day": "Thu",
-      "ep_count": "EP1"
-    },
-    "57058": {
-      "title": "Ore wa Subete wo \"Parry\" suru: Gyaku Kanchigai no Sekai Saikyou wa Boukensha ni Naritai",
-      "airing_day": "Thu",
-      "ep_count": "EP1"
-    },
-    "49559": {
-      "title": "Quanzhi Gaoshou 3rd Season",
-      "airing_day": "Thu",
-      "ep_count": "EP7"
-    },
-    "57325": {
-      "title": "Ramen Akaneko",
-      "airing_day": "Thu",
-      "ep_count": "EP1"
-    },
-    "54855": {
-      "title": "Senpai wa Otokonoko",
-      "airing_day": "Thu",
-      "ep_count": "EP1"
-    },
-    "1960": {
-      "title": "Sore Ike! Anpanman",
-      "airing_day": "Thu",
-      "ep_count": "EP1665"
-    },
-    "55848": {
-      "title": "Suicide Squad ISEKAI",
-      "airing_day": "Thu",
-      "ep_count": "EP4"
-    },
-    "55844": {
-      "title": "Tasogare Out Focus",
-      "airing_day": "Thu",
-      "ep_count": "EP1"
-    },
-    "58644": {
-      "title": "Yozakura-san Chi no Mini Sakusen",
-      "airing_day": "Thu",
-      "ep_count": "EP13"
-    },
-    "53802": {
-      "title": "2.5-jigen no Ririsa",
-      "airing_day": "Fri",
-      "ep_count": "EP1"
-    },
     "58272": {
       "title": "Boku no Tsuma wa Kanjou ga Nai",
       "airing_day": "Sat",
@@ -127,6 +25,53 @@
       "title": "Elf-san wa Yaserarenai.",
       "airing_day": "Sat",
       "ep_count": "EP1"
+    },
+    "57946": {
+      "title": "Himitsu no AiPri",
+      "airing_day": "Sat",
+      "ep_count": "EP14"
+    },
+    "56449": {
+      "title": "Madougushi Dahliya wa Utsumukanai: Kyou kara Jiyuu na Shokunin Life",
+      "airing_day": "Sat",
+      "ep_count": "EP1"
+    },
+    "57646": {
+      "title": "Mob kara Hajimaru Tansaku Eiyuutan",
+      "airing_day": "Sat",
+      "ep_count": "EP1\u20132"
+    },
+    "57864": {
+      "title": "MONOGATARI Series: OFF & MONSTER Season",
+      "airing_day": "Sat",
+      "ep_count": "EP1"
+    },
+    "54724": {
+      "title": "Nige Jouzu no Wakagimi",
+      "airing_day": "Sat",
+      "ep_count": "EP1"
+    },
+    "21": { "title": "One Piece", "airing_day": "Sat", "ep_count": "EP1111" },
+    "57810": {
+      "title": "Shoushimin Series",
+      "airing_day": "Sat",
+      "ep_count": "EP1"
+    },
+    "58357": {
+      "title": "Tensui no Sakuna-hime",
+      "airing_day": "Sat",
+      "ep_count": "EP1"
+    },
+    "55911": { "title": "The Fable", "airing_day": "Sat", "ep_count": "EP14" },
+    "54040": {
+      "title": "Tousouchuu: Great Mission",
+      "airing_day": "Sat",
+      "ep_count": "EP63"
+    },
+    "57390": {
+      "title": "Wonderful Precure!",
+      "airing_day": "Sat",
+      "ep_count": "EP23"
     },
     "58985": {
       "title": "0 Saiju Start Dash Monogatari",
@@ -158,6 +103,32 @@
       "airing_day": "Sun",
       "ep_count": "EP1"
     },
+    "57099": {
+      "title": "na-nare hana-nare",
+      "airing_day": "Sun",
+      "ep_count": "EP1"
+    },
+    "37096": {
+      "title": "Puzzle & Dragon",
+      "airing_day": "Sun",
+      "ep_count": "EP314"
+    },
+    "2406": { "title": "Sazae-san", "airing_day": "Sun", "ep_count": "EP2738" },
+    "58059": {
+      "title": "Tsue to Tsurugi no Wistoria",
+      "airing_day": "Sun",
+      "ep_count": "EP1"
+    },
+    "54284": {
+      "title": "VTuber Nanda ga Haishin Kiri Wasuretara Densetsu ni Natteta",
+      "airing_day": "Sun",
+      "ep_count": "EP1"
+    },
+    "53865": {
+      "title": "Yozakura-san Chi no Daisakusen",
+      "airing_day": "Sun",
+      "ep_count": "EP14"
+    },
     "57947": {
       "title": "MAYONAKA PUNCH",
       "airing_day": "Mon",
@@ -182,6 +153,203 @@
       "title": "Chibi Godzilla no Gyakushuu 2024",
       "airing_day": "Tue",
       "ep_count": "EP15"
+    },
+    "58926": {
+      "title": "Egumi Legacy",
+      "airing_day": "Tue",
+      "ep_count": "EP1"
+    },
+    "52367": {
+      "title": "Isekai Shikkaku",
+      "airing_day": "Tue",
+      "ep_count": "EP1"
+    },
+    "57217": {
+      "title": "Katsute Mahou Shoujo to Aku wa Tekitai shiteita.",
+      "airing_day": "Tue",
+      "ep_count": "EP1"
+    },
+    "57945": { "title": "Tasuketsu", "airing_day": "Tue", "ep_count": "EP2" },
+    "49981": {
+      "title": "Kimi to Boku no Saigo no Senjou, Aruiwa Sekai ga Hajimaru Seisen Season II",
+      "airing_day": "Wed",
+      "ep_count": "EP1"
+    },
+    "55996": {
+      "title": "Koi wa Futago de Warikirenai",
+      "airing_day": "Wed",
+      "ep_count": "EP1"
+    },
+    "57876": {
+      "title": "Maougun Saikyou no Majutsushi wa Ningen datta",
+      "airing_day": "Wed",
+      "ep_count": "EP3"
+    },
+    "55791": {
+      "title": "\u3010OSHI NO KO\u30112nd Season",
+      "airing_day": "Wed",
+      "ep_count": "EP2"
+    },
+    "58426": {
+      "title": "Shikanoko Nokonoko Koshitantan",
+      "airing_day": "Wed",
+      "ep_count": "EP2"
+    },
+    "54744": {
+      "title": "Tokidoki Bosotto Russia-go de Dereru Tonari no Alya-san",
+      "airing_day": "Wed",
+      "ep_count": "EP2"
+    },
+    "50250": { "title": "Chiikawa", "airing_day": "Thu", "ep_count": "EP183" },
+    "58883": {
+      "title": "DEAD DEAD DEMONS DEDEDEDE DESTRUCTION (Series)",
+      "airing_day": "Thu",
+      "ep_count": "EP7"
+    },
+    "54968": { "title": "Giji Harem", "airing_day": "Thu", "ep_count": "EP2" },
+    "52481": {
+      "title": "Gimai Seikatsu",
+      "airing_day": "Thu",
+      "ep_count": "EP2"
+    },
+    "57892": {
+      "title": "Hazurewaku no \"Joutai Ijou Skill\" de Saikyou ni Natta Ore ga Subete wo Juurin suru made",
+      "airing_day": "Thu",
+      "ep_count": "EP2"
+    },
+    "56853": {
+      "title": "I.CINNAMOROLL Animation",
+      "airing_day": "Thu",
+      "ep_count": "EP39"
+    },
+    "57753": {
+      "title": "Jantama Kan!!",
+      "airing_day": "Thu",
+      "ep_count": "EP12"
+    },
+    "55749": {
+      "title": "Megami no Cafe Terrace 2nd Season",
+      "airing_day": "Thu",
+      "ep_count": "EP2"
+    },
+    "57058": {
+      "title": "Ore wa Subete wo \"Parry\" suru: Gyaku Kanchigai no Sekai Saikyou wa Boukensha ni Naritai",
+      "airing_day": "Thu",
+      "ep_count": "EP2"
+    },
+    "49559": {
+      "title": "Quanzhi Gaoshou 3rd Season",
+      "airing_day": "Thu",
+      "ep_count": "EP8"
+    },
+    "57325": {
+      "title": "Ramen Akaneko",
+      "airing_day": "Thu",
+      "ep_count": "EP2"
+    },
+    "54855": {
+      "title": "Senpai wa Otokonoko",
+      "airing_day": "Thu",
+      "ep_count": "EP2"
+    },
+    "1960": {
+      "title": "Sore Ike! Anpanman",
+      "airing_day": "Thu",
+      "ep_count": "EP1666"
+    },
+    "55848": {
+      "title": "Suicide Squad ISEKAI",
+      "airing_day": "Thu",
+      "ep_count": "EP5"
+    },
+    "55844": {
+      "title": "Tasogare Out Focus",
+      "airing_day": "Thu",
+      "ep_count": "EP2"
+    },
+    "58644": {
+      "title": "Yozakura-san Chi no Mini Sakusen",
+      "airing_day": "Thu",
+      "ep_count": "EP14"
+    },
+    "53802": {
+      "title": "2.5-jigen no Ririsa",
+      "airing_day": "Fri",
+      "ep_count": "EP2"
+    },
+    "56566": { "title": "Beyblade X", "airing_day": "Fri", "ep_count": "EP40" },
+    "32353": {
+      "title": "Bonobono (TV 2016)",
+      "airing_day": "Fri",
+      "ep_count": "EP418"
+    },
+    "53626": {
+      "title": "Bye Bye, Earth",
+      "airing_day": "Fri",
+      "ep_count": "EP1"
+    },
+    "54143": {
+      "title": "CARDFIGHT!! VANGUARD Divinez Season 2",
+      "airing_day": "Fri",
+      "ep_count": "EP2"
+    },
+    "56835": {
+      "title": "Code Geass: Dakkan no Roz\u00e9",
+      "airing_day": "Fri",
+      "ep_count": "EP4"
+    },
+    "56348": {
+      "title": "Dungeon no Naka no Hito",
+      "airing_day": "Fri",
+      "ep_count": "EP2"
+    },
+    "42295": {
+      "title": "Fushigi Dagashiya Zenitendou",
+      "airing_day": "Fri",
+      "ep_count": "EP128"
+    },
+    "56189": { "title": "Grendizer U", "airing_day": "Fri", "ep_count": "EP2" },
+    "58506": {
+      "title": "Harimaware! Koinu 2nd Season",
+      "airing_day": "Fri",
+      "ep_count": "EP2"
+    },
+    "58944": { "title": "JOCHUM", "airing_day": "Fri", "ep_count": "EP1" },
+    "54835": {
+      "title": "Kono Sekai wa Fukanzen Sugiru",
+      "airing_day": "Fri",
+      "ep_count": "EP2"
+    },
+    "56063": {
+      "title": "NieR:Automata Ver1.1a Cour 2",
+      "airing_day": "Fri",
+      "ep_count": "EP2"
+    },
+    "50418": { "title": "Ninjala", "airing_day": "Fri", "ep_count": "EP126" },
+    "53876": {
+      "title": "Pocket Monsters (2023)",
+      "airing_day": "Fri",
+      "ep_count": "EP58"
+    },
+    "57538": {
+      "title": "Sai-Kyo-Oh! Zukan: The Ultimate Battles",
+      "airing_day": "Fri",
+      "ep_count": "EP28"
+    },
+    "57614": {
+      "title": "Shadowverse Flame: Arc-hen",
+      "airing_day": "Fri",
+      "ep_count": "EP13"
+    },
+    "18941": {
+      "title": "Shimajirou no Wow!",
+      "airing_day": "Fri",
+      "ep_count": "EP625"
+    },
+    "58905": {
+      "title": "Yoasobi Gurashi!",
+      "airing_day": "Fri",
+      "ep_count": "EP5"
     }
   }
 }
