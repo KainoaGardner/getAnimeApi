@@ -24,7 +24,13 @@
   background-color: #282828;
 }
 
-.dark_link {
+.mal_link,
+.livechart_link {
+  border-color: #8b8b8b;
+}
+
+.dark_link,
+.sort_dark {
   background-color: #282828;
   border-color: #8b8b8b;
   color: white;

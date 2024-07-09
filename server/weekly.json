@@ -1,134 +1,6 @@
 {
-  "week": "27",
+  "week": "28",
   "weekly": {
-    "58272": {
-      "title": "Boku no Tsuma wa Kanjou ga Nai",
-      "airing_day": "Sat",
-      "ep_count": "EP2"
-    },
-    "966": {
-      "title": "Crayon Shin-chan",
-      "airing_day": "Sat",
-      "ep_count": "EP1240"
-    },
-    "8687": {
-      "title": "Doraemon (2005)",
-      "airing_day": "Sat",
-      "ep_count": "EP734"
-    },
-    "51039": {
-      "title": "Doupo Cangqiong: Nian Fan",
-      "airing_day": "Sat",
-      "ep_count": "EP104"
-    },
-    "57845": {
-      "title": "Elf-san wa Yaserarenai.",
-      "airing_day": "Sat",
-      "ep_count": "EP1"
-    },
-    "57946": {
-      "title": "Himitsu no AiPri",
-      "airing_day": "Sat",
-      "ep_count": "EP14"
-    },
-    "56449": {
-      "title": "Madougushi Dahliya wa Utsumukanai: Kyou kara Jiyuu na Shokunin Life",
-      "airing_day": "Sat",
-      "ep_count": "EP1"
-    },
-    "57646": {
-      "title": "Mob kara Hajimaru Tansaku Eiyuutan",
-      "airing_day": "Sat",
-      "ep_count": "EP1\u20132"
-    },
-    "57864": {
-      "title": "MONOGATARI Series: OFF & MONSTER Season",
-      "airing_day": "Sat",
-      "ep_count": "EP1"
-    },
-    "54724": {
-      "title": "Nige Jouzu no Wakagimi",
-      "airing_day": "Sat",
-      "ep_count": "EP1"
-    },
-    "21": { "title": "One Piece", "airing_day": "Sat", "ep_count": "EP1111" },
-    "57810": {
-      "title": "Shoushimin Series",
-      "airing_day": "Sat",
-      "ep_count": "EP1"
-    },
-    "58357": {
-      "title": "Tensui no Sakuna-hime",
-      "airing_day": "Sat",
-      "ep_count": "EP1"
-    },
-    "55911": { "title": "The Fable", "airing_day": "Sat", "ep_count": "EP14" },
-    "54040": {
-      "title": "Tousouchuu: Great Mission",
-      "airing_day": "Sat",
-      "ep_count": "EP63"
-    },
-    "57390": {
-      "title": "Wonderful Precure!",
-      "airing_day": "Sat",
-      "ep_count": "EP23"
-    },
-    "58985": {
-      "title": "0 Saiju Start Dash Monogatari",
-      "airing_day": "Sun",
-      "ep_count": "EP1"
-    },
-    "6149": {
-      "title": "Chibi Maruko-chan (1995)",
-      "airing_day": "Sun",
-      "ep_count": "EP1438"
-    },
-    "49785": {
-      "title": "FAIRY TAIL: 100 Years Quest",
-      "airing_day": "Sun",
-      "ep_count": "EP1"
-    },
-    "44042": {
-      "title": "Holo no Graffiti",
-      "airing_day": "Sun",
-      "ep_count": "EP268"
-    },
-    "57380": {
-      "title": "Isekai Yururi Kikou ~Kosodateshinagara Boukensha Shimasu~",
-      "airing_day": "Sun",
-      "ep_count": "EP1\u20132"
-    },
-    "52635": {
-      "title": "Kami no Tou 2nd Season",
-      "airing_day": "Sun",
-      "ep_count": "EP1"
-    },
-    "57099": {
-      "title": "na-nare hana-nare",
-      "airing_day": "Sun",
-      "ep_count": "EP1"
-    },
-    "37096": {
-      "title": "Puzzle & Dragon",
-      "airing_day": "Sun",
-      "ep_count": "EP314"
-    },
-    "2406": { "title": "Sazae-san", "airing_day": "Sun", "ep_count": "EP2738" },
-    "58059": {
-      "title": "Tsue to Tsurugi no Wistoria",
-      "airing_day": "Sun",
-      "ep_count": "EP1"
-    },
-    "54284": {
-      "title": "VTuber Nanda ga Haishin Kiri Wasuretara Densetsu ni Natteta",
-      "airing_day": "Sun",
-      "ep_count": "EP1"
-    },
-    "53865": {
-      "title": "Yozakura-san Chi no Daisakusen",
-      "airing_day": "Sun",
-      "ep_count": "EP14"
-    },
     "57947": {
       "title": "MAYONAKA PUNCH",
       "airing_day": "Mon",
@@ -350,6 +222,164 @@
       "title": "Yoasobi Gurashi!",
       "airing_day": "Fri",
       "ep_count": "EP5"
+    },
+    "53128": {
+      "title": "ATRI -My Dear Moments-",
+      "airing_day": "Sat",
+      "ep_count": "EP1"
+    },
+    "54789": {
+      "title": "Boku no Hero Academia 7th Season",
+      "airing_day": "Sat",
+      "ep_count": "EP10"
+    },
+    "58272": {
+      "title": "Boku no Tsuma wa Kanjou ga Nai",
+      "airing_day": "Sat",
+      "ep_count": "EP3"
+    },
+    "966": {
+      "title": "Crayon Shin-chan",
+      "airing_day": "Sat",
+      "ep_count": "EP1241"
+    },
+    "8687": {
+      "title": "Doraemon (2005)",
+      "airing_day": "Sat",
+      "ep_count": "EP735"
+    },
+    "57845": {
+      "title": "Elf-san wa Yaserarenai.",
+      "airing_day": "Sat",
+      "ep_count": "EP2"
+    },
+    "57946": {
+      "title": "Himitsu no AiPri",
+      "airing_day": "Sat",
+      "ep_count": "EP15"
+    },
+    "56449": {
+      "title": "Madougushi Dahliya wa Utsumukanai: Kyou kara Jiyuu na Shokunin Life",
+      "airing_day": "Sat",
+      "ep_count": "EP2"
+    },
+    "57524": {
+      "title": "Make Heroine ga Oosugiru!",
+      "airing_day": "Sat",
+      "ep_count": "EP1"
+    },
+    "57646": {
+      "title": "Mob kara Hajimaru Tansaku Eiyuutan",
+      "airing_day": "Sat",
+      "ep_count": "EP3"
+    },
+    "57864": {
+      "title": "MONOGATARI Series: OFF & MONSTER Season",
+      "airing_day": "Sat",
+      "ep_count": "EP2"
+    },
+    "56062": {
+      "title": "Naze Boku no Sekai wo Daremo Oboeteinai no ka?",
+      "airing_day": "Sat",
+      "ep_count": "EP1"
+    },
+    "54724": {
+      "title": "Nige Jouzu no Wakagimi",
+      "airing_day": "Sat",
+      "ep_count": "EP2"
+    },
+    "21": { "title": "One Piece", "airing_day": "Sat", "ep_count": "EP1112" },
+    "57798": {
+      "title": "SHINKALION Change The World",
+      "airing_day": "Sat",
+      "ep_count": "EP14"
+    },
+    "57810": {
+      "title": "Shoushimin Series",
+      "airing_day": "Sat",
+      "ep_count": "EP2"
+    },
+    "58357": {
+      "title": "Tensui no Sakuna-hime",
+      "airing_day": "Sat",
+      "ep_count": "EP2"
+    },
+    "55911": { "title": "The Fable", "airing_day": "Sat", "ep_count": "EP15" },
+    "54040": {
+      "title": "Tousouchuu: Great Mission",
+      "airing_day": "Sat",
+      "ep_count": "EP64"
+    },
+    "57390": {
+      "title": "Wonderful Precure!",
+      "airing_day": "Sat",
+      "ep_count": "EP24"
+    },
+    "50607": {
+      "title": "Yu\u2606Gi\u2606Oh! GO RUSH!!",
+      "airing_day": "Sat",
+      "ep_count": "EP116"
+    },
+    "58985": {
+      "title": "0 Saiju Start Dash Monogatari",
+      "airing_day": "Sun",
+      "ep_count": "EP2"
+    },
+    "49785": {
+      "title": "FAIRY TAIL 100 YEARS QUEST",
+      "airing_day": "Sun",
+      "ep_count": "EP2"
+    },
+    "44042": {
+      "title": "Holo no Graffiti",
+      "airing_day": "Sun",
+      "ep_count": "EP269"
+    },
+    "57380": {
+      "title": "Isekai Yururi Kikou ~Kosodateshinagara Boukensha Shimasu~",
+      "airing_day": "Sun",
+      "ep_count": "EP3"
+    },
+    "52635": {
+      "title": "Kami no Tou 2nd Season",
+      "airing_day": "Sun",
+      "ep_count": "EP2"
+    },
+    "54730": {
+      "title": "Kinnikuman: Perfect Origin-hen",
+      "airing_day": "Sun",
+      "ep_count": "EP1"
+    },
+    "57099": {
+      "title": "na-nare hana-nare",
+      "airing_day": "Sun",
+      "ep_count": "EP2"
+    },
+    "37096": {
+      "title": "Puzzle & Dragon",
+      "airing_day": "Sun",
+      "ep_count": "EP315"
+    },
+    "2406": { "title": "Sazae-san", "airing_day": "Sun", "ep_count": "EP2739" },
+    "58059": {
+      "title": "Tsue to Tsurugi no Wistoria",
+      "airing_day": "Sun",
+      "ep_count": "EP2"
+    },
+    "54284": {
+      "title": "VTuber Nanda ga Haishin Kiri Wasuretara Densetsu ni Natteta",
+      "airing_day": "Sun",
+      "ep_count": "EP2"
+    },
+    "59010": {
+      "title": "Yami Shibai 13",
+      "airing_day": "Sun",
+      "ep_count": "EP1"
+    },
+    "53865": {
+      "title": "Yozakura-san Chi no Daisakusen",
+      "airing_day": "Sun",
+      "ep_count": "EP15"
     }
   }
 }

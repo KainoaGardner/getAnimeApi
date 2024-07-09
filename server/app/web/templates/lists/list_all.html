@@ -18,16 +18,21 @@
 <h1 class="main_text">Current Season</h1>
 <a class="mal_link link_button" href="https://myanimelist.net/anime/season">Mal</a>
 </div>
+<form class="sort_block" action="" method="post">
+  <input class="sort_button sort_light sort_dark" type="submit" name="recent" value="Recent"/>
+  <input class="sort_button sort_light sort_dark" type="submit" name="name" value="Name"/>
+  <input class="sort_button sort_light sort_dark" type="submit" name="id" value="Id"/>
+</form>
 <ol>
   {% for anime in anime_list %}
   <li class="anime_block dark_body light_body ">
 
-    <img class="list_image light_list_image dark_list_image" src={{anime_list[anime]["image"]}}>
+    <img class="list_image light_list_image dark_list_image" src={{anime[2]}}>
     <div class="anime_text_block">
-    <p class="anime_text anime_title" > {{anime_list[anime]["title"]}}</p>
-    <p class="anime_text">ID: {{anime}} </p>
+    <p class="anime_text anime_title" > {{anime[1]}}</p>
+    <p class="anime_text">ID: {{anime[0]}} </p>
     </div>
-    <form action="add/{{anime}}" method="post">
+    <form action="add/{{anime[0]}}" method="post">
       <input class="anime_button light_button dark_button" type="submit" name="add" value="Add" />
     </form>
   </li>

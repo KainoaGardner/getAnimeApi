@@ -7,18 +7,32 @@
   border: solid;
   border-width: 3px;
 }
+
+.sort_block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5 5px;
+  margin: 0px 10px;
+}
+
 .anime_text_block {
   flex: 1 1 0;
   padding: 10px 10px;
 }
 
-.anime_button {
+.anime_button,
+.sort_button {
   padding: 10px 10px;
   margin: 10px 10px;
   border: 3px solid;
   font-size: 15px;
   font-weight: 600;
   width: 100px;
+}
+
+.sort_button {
+  margin: 10px 1px;
 }
 
 .watchlist_input {
@@ -50,7 +64,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px 10px;
+  margin: 25px 10px;
 }
 
 .main_text {
@@ -80,6 +94,12 @@
 .mal_link {
   background-color: #3498db;
   color: white;
+}
+.livechart_link {
+  background-color: #f8efba;
+  background-color: #ffda79;
+
+  color: #0c0c0c;
 }
 
 .watchlist_main {

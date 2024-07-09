@@ -76,3 +76,14 @@ nyaa.add_argument(
     action="store_true",
     help="open nyaa links for each show",
 )
+
+watchlist.add_argument(
+    "-s",
+    "--sort",
+    nargs="?",
+    const="r",
+    type=str,
+    choices=["recent", "r", "name", "n", "id", "i"],
+    metavar=("today, t, watchlist, wl, all, a"),
+    help="sort showed list",
+)

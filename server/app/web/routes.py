@@ -3,7 +3,7 @@ import requests
 import webbrowser
 
 from app import app, db
-from app.web.web_functions import *
+from app.web.web_functions.other import *
 from app.web import APIBASE
 
 
@@ -102,15 +102,29 @@ def user():
     return render_template("user.html", user=user, theme=theme)
 
 
-@app.route("/list/all")
+@app.route("/list/all", methods=["GET", "POST"])
 def list_all():
     user_response = requests.get(APIBASE + f"users/list").json()
+    anime_list = []
+    for anime in user_response:
+        anime_list.append(
+            [anime, user_response[anime]["title"], user_response[anime]["image"]]
+        )
 
+    sort_type = "date"
+    if request.method == "POST":
+        if "name" in request.form:
+            sort_type = "name"
+        elif "id" in request.form:
+            sort_type = "id"
+        else:
+            sort_type = "recent"
+    anime_list = sort_list(anime_list, sort_type)
     theme = get_theme()
-    return render_template("lists/list_all.html", anime_list=user_response, theme=theme)
+    return render_template("lists/list_all.html", anime_list=anime_list, theme=theme)
 
 
-@app.route("/list/watchlist")
+@app.route("/list/watchlist", methods=["GET", "POST"])
 def list_watchlist():
     if not check_login():
         return redirect(url_for("login"))
@@ -119,22 +133,38 @@ def list_watchlist():
     token = user["token"]
     headersAuth = {"Authorization": "Bearer " + token}
 
-    watchlist = requests.get(
+    user_response = requests.get(
         APIBASE + f"users/list/token/watchlist", headers=headersAuth
     ).json()
 
+    anime_list = []
+    for anime in user_response:
+        anime_list.append(
+            [anime, user_response[anime]["title"], user_response[anime]["image"]]
+        )
+
+    sort_type = "date"
+    if request.method == "POST":
+        if "name" in request.form:
+            sort_type = "name"
+        elif "id" in request.form:
+            sort_type = "id"
+        else:
+            sort_type = "recent"
+
+    anime_list = sort_list(anime_list, sort_type)
     theme = get_theme()
-    count = len(watchlist)
+    count = len(user_response)
     return render_template(
         "lists/list_watchlist.html",
         user=user,
-        watchlist=watchlist,
+        watchlist=anime_list,
         theme=theme,
         count=count,
     )
 
 
-@app.route("/list/today")
+@app.route("/list/today", methods=["GET", "POST"])
 def list_today():
     if not check_login():
         return redirect(url_for("login"))
@@ -143,17 +173,38 @@ def list_today():
     token = user["token"]
     headersAuth = {"Authorization": "Bearer " + token}
 
-    airing_list = requests.get(
+    user_response = requests.get(
         APIBASE + f"users/list/token/today", headers=headersAuth
     ).json()
 
+    anime_list = []
+    for anime in user_response:
+        anime_list.append(
+            [
+                anime,
+                user_response[anime]["title"],
+                user_response[anime]["image"],
+                user_response[anime]["ep_count"],
+            ]
+        )
+
+    sort_type = "date"
+    if request.method == "POST":
+        if "name" in request.form:
+            sort_type = "name"
+        elif "id" in request.form:
+            sort_type = "id"
+        else:
+            sort_type = "recent"
+    anime_list = sort_list(anime_list, sort_type)
+
     theme = get_theme()
 
-    count = len(airing_list)
+    count = len(user_response)
     return render_template(
         "lists/list_today.html",
         user=user,
-        airing_list=airing_list,
+        airing_list=anime_list,
         theme=theme,
         count=count,
     )

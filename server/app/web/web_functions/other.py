@@ -14,3 +14,16 @@ def get_theme():
 
     theme = session["theme"]
     return theme
+
+
+def sort_list(anime_list, sort):
+    if sort == "name":
+        anime_list.sort(key=lambda x: x[1])
+    elif sort == "id":
+        anime_list.sort(key=lambda x: x[0])
+    else:
+        anime_list.reverse()
+
+    sorted_list = anime_list
+
+    return sorted_list

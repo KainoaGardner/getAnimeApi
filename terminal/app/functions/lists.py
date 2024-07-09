@@ -6,6 +6,7 @@ import json
 
 
 def lists(args):
+    sort_type = get_sort_type(args)
     if "all" not in args.list and "a" not in args.list:
         with open("app/user.json", "r") as f:
             json_object = json.load(f)
@@ -16,37 +17,51 @@ def lists(args):
                 headersAuth = {"Authorization": "Bearer " + token}
 
                 if "today" in args.list or "t" in args.list:
-                    list_today(headersAuth)
+                    list_today(headersAuth, sort_type)
                 elif "watchlist" in args.list or "wl" in args.list:
-                    list_watchlist(headersAuth)
+                    list_watchlist(headersAuth, sort_type)
     else:
-        list_all()
+        list_all(sort_type)
 
 
-def list_today(headersAuth):
+def list_today(headersAuth, sort_type):
     print(TerminalColor.BOLD + "---Airing Today---" + TerminalColor.END)
     user_response = requests.get(
         APIBASE + f"users/list/token/today", headers=headersAuth
     ).json()
+
     if "msg" in user_response:
         print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
 
     else:
-        for count, anime in enumerate(user_response):
+        anime_list = []
+        for anime in user_response:
+            anime_list.append(
+                [
+                    anime,
+                    user_response[anime]["title"],
+                    user_response[anime]["image"],
+                    user_response[anime]["ep_count"],
+                ]
+            )
+
+        anime_list = sort_list(anime_list, sort_type)
+
+        for count, anime in enumerate(anime_list):
             print(
                 TerminalColor.BOLD
                 + f"{count + 1} ID: "
-                + anime
+                + anime[0]
                 + " "
-                + user_response[anime]["ep_count"]
+                + anime[3]
                 + TerminalColor.END,
                 end=" ",
             )
 
-            print(user_response[anime]["title"])
+            print(anime[1])
 
 
-def list_watchlist(headersAuth):
+def list_watchlist(headersAuth, sort_type):
     print(
         TerminalColor.BOLD + "---Watchlist---" + TerminalColor.END,
     )
@@ -58,23 +73,48 @@ def list_watchlist(headersAuth):
         print(TerminalColor.BOLD + "---Not logged in---" + TerminalColor.END)
 
     else:
-        for count, anime in enumerate(user_response):
+        anime_list = []
+        for anime in user_response:
+            anime_list.append(
+                [
+                    anime,
+                    user_response[anime]["title"],
+                    user_response[anime]["image"],
+                ]
+            )
+
+        anime_list = sort_list(anime_list, sort_type)
+
+        for count, anime in enumerate(anime_list):
             print(
-                TerminalColor.BOLD + f"{count + 1} ID: " + anime + TerminalColor.END,
+                TerminalColor.BOLD + f"{count + 1} ID: " + anime[0] + TerminalColor.END,
                 end=" ",
             )
-            print(user_response[anime]["title"])
+            print(anime[1])
 
 
-def list_all():
+def list_all(sort_type):
     print(TerminalColor.BOLD + "---Getting Shows---" + TerminalColor.END)
     user_response = requests.get(APIBASE + f"users/list").json()
-    for count, anime in enumerate(user_response):
+
+    anime_list = []
+    for anime in user_response:
+        anime_list.append(
+            [
+                anime,
+                user_response[anime]["title"],
+                user_response[anime]["image"],
+            ]
+        )
+
+    anime_list = sort_list(anime_list, sort_type)
+
+    for count, anime in enumerate(anime_list):
         print(
-            TerminalColor.BOLD + f"{count + 1} ID: " + str(anime) + TerminalColor.END,
+            TerminalColor.BOLD + f"{count + 1} ID: " + anime[0] + TerminalColor.END,
             end=" ",
         )
-        print(user_response[anime]["title"])
+        print(anime[1])
 
 
 def nyaa():
@@ -106,5 +146,25 @@ def list_nyaa(headersAuth):
         return user_response
 
 
-def get_week():
-    user_response = requests.post(APIBASE + f"users/list/").json()
+def sort_list(anime_list, sort):
+    if sort == "name":
+        anime_list.sort(key=lambda x: x[1])
+    elif sort == "id":
+        anime_list.sort(key=lambda x: x[0])
+    else:
+        anime_list.reverse()
+
+    sorted_list = anime_list
+
+    return sorted_list
+
+
+def get_sort_type(args):
+    if not args.sort:
+        return "recent"
+    if "i" in args.sort or "id" in args.sort:
+        return "id"
+    elif "n" in args.sort or "name" in args.sort:
+        return "name"
+    else:
+        return "recent"

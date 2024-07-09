@@ -15,7 +15,8 @@
   color: #0c0c0c;
 }
 
-.mal_link {
+.mal_link,
+.livechart_link {
   border-color: #0c0c0c;
 }
 
@@ -23,7 +24,8 @@
   background-color: white;
 }
 
-.light_link {
+.light_link,
+.sort_light {
   background-color: white;
   border-color: #0c0c0c;
 

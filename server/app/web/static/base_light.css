@@ -7,11 +7,9 @@ a {
   border-color: #0c0c0c;
   color: #0c0c0c;
 }
-.light_button:active {
-  box-shadow: 0px 0px 5px black;
-}
-
-a:active {
+a:active,
+.light_button:active,
+.sort_light:active {
   box-shadow: 0px 0px 5px black;
 }
 

@@ -21,19 +21,27 @@ css %}
 <form action="nyaa" method="get">
   <input class="anime_button main_button dark_button light_button" type="submit" name="nyaa" value="nyaa" />
 </form>
-<a class="link_button dark_link light_link" href="https://www.livechart.me/schedule">Weekly</a>
+<a class="link_button livechart_link" href="https://www.livechart.me/schedule">LiveChart</a>
 </div>
 </div>
+
+
+<form class="sort_block" action="" method="post">
+  <input class="sort_button sort_light sort_dark" type="submit" name="recent" value="Recent"/>
+  <input class="sort_button sort_light sort_dark" type="submit" name="name" value="Name"/>
+  <input class="sort_button sort_light sort_dark" type="submit" name="id" value="Id"/>
+</form>
+
 
 <ol>
   {% for anime in airing_list %}
   <li class="anime_block dark_body light_body ">
-    <img class="list_image light_list_image dark_list_image" src={{airing_list[anime]["image"]}}>
+    <img class="list_image light_list_image dark_list_image" src={{anime[2]}}>
     <div class="anime_text_block">
-    <p class="anime_text anime_title" > {{airing_list[anime]["title"]}} {{airing_list[anime]["ep_count"]}}</p>
-    <p class="anime_text">ID: {{anime}}</p>
+    <p class="anime_text anime_title" > {{anime[1]}} {{anime[3]}}</p>
+    <p class="anime_text">ID: {{anime[0]}}</p>
     </div>
-    <form action="delete/{{anime}}" method="post">
+    <form action="delete/{{anime[0]}}" method="post">
       <input class="anime_button light_button dark_button" type="submit" name="delete" value="Remove" />
     </form>
 
