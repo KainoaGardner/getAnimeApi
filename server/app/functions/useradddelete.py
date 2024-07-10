@@ -27,7 +27,6 @@ def add(user_id, add_shows):
                 added["added"].update({anime_id: {"title": title}})
 
     db.session.commit()
-    print(added)
 
     return added["added"]
 
