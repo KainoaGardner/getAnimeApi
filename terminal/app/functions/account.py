@@ -32,9 +32,15 @@ def user():
             user_response = requests.get(
                 APIBASE + f"users/list/token/user", headers=headersAuth
             ).json()
-            print(
-                TerminalColor.BOLD + f"Logged in as {user_response}" + TerminalColor.END
-            )
+            if user_response == "none":
+                print(TerminalColor.BOLD + "Not logged in" + TerminalColor.END)
+            else:
+
+                print(
+                    TerminalColor.BOLD
+                    + f"Logged in as {user_response}"
+                    + TerminalColor.END
+                )
 
 
 def logout():

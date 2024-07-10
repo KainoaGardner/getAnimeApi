@@ -127,4 +127,6 @@ def get_season_anime(week):
 
 def user(user_id):
     user = UserModel.query.filter_by(id=user_id).first()
+    if not user:
+        return "none"
     return user.username
